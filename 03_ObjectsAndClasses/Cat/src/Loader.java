@@ -8,6 +8,7 @@ public class Loader {
         Cat kot = new Cat();
         Cat cat = new Cat();
         Cat evil = new Cat();
+
         // выводим веса всех кошек
         System.out.println(" murka весит - " + murka.getWeight());
         System.out.println(" vasiliy весит - " + vasiliy.getWeight());
@@ -20,17 +21,17 @@ public class Loader {
 
         // кошка 1 покормлена. проверка в изменении веса
         System.out.println(" Вес кошки evil до приема пищи - " + evil.getWeight() + " gramm ");
-        evil.feed(300.54);
+        evil.feed(300);
         System.out.println(" Кошка evil стала весить " + evil.getWeight() + " gramm ");
 
         // кошка 1 покормлена. проверка в изменении веса
         System.out.println(" Вес кошки cat до приема пищи - " + cat.getWeight() + " gramm ");
-        evil.feed((double) 500);
+        cat.feed(500);
         System.out.println(" Кошка cat стала весить - " + cat.getWeight() + " gramm ");
         System.out.println("================================================================");
 
         // доводим бедного кота  kot до смерти от мяуканья. жесть пример. садисты
-        while (kot.getWeight() >= 1000) {
+        while (kot.getStatus() != "Dead") {
             kot.meow();
         }
         System.out.println("====================");
@@ -38,9 +39,9 @@ public class Loader {
         System.out.println("====================");
 
         // доводим кота dymok до состтояния дымка. садисты ( взрыв от переедания)
-        while (dymok.getWeight() <= 9000) {
-            dymok.feed((double) 200);
-            dymok.drink((double) 20);
+        while (dymok.getStatus() != "Exploded") {
+            dymok.feed(200);
+            dymok.drink( 20);
             System.out.println("dymok немного перекусил и стал весить " + dymok.getWeight() + " gramm");
         }
         System.out.println("====================");
