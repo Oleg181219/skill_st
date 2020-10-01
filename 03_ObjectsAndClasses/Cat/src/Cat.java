@@ -23,19 +23,28 @@ public class Cat {
         return count;
     }
 
+
+
     public void meow() {
-        weight = weight - 1;
-        // System.out.println("Meow");
+        if (weight >= minWeight & weight <= maxWeight) {
+            weight = weight - 1;
+            System.out.println("Meow");
+        }
+
     }
 
     public void pee() {
-        weight = weight - (weight / 33);
-        //System.out.println("pee");
+        if (weight >= minWeight & weight <= maxWeight) {
+            weight = weight - (weight / 33);
+            System.out.println("pee");
+        }
     }
 
     public void feed(int amount) {
-        weight += amount;
-        summF += amount;
+        if (weight >= minWeight & weight <= maxWeight) {
+            weight += amount;
+            summF += amount;
+        }
 
     }
 
@@ -44,7 +53,9 @@ public class Cat {
     }
 
     public void drink(int amount) {
-        weight = weight + amount;
+        if (weight >= minWeight & weight <= maxWeight) {
+            weight = weight + amount;
+        }
     }
 
     public Double getWeight() {
@@ -53,10 +64,8 @@ public class Cat {
 
     public String getStatus() {
         if (weight < minWeight) {
-            count = count - 0.5;
             return "Dead";
         } else if (weight > maxWeight) {
-            count = count - 0.5;
             return "Exploded";
         } else if (weight > originWeight) {
             return "Sleeping";
