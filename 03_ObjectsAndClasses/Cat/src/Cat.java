@@ -2,7 +2,9 @@
 public class Cat {
 
     public static double count; //статическая переменная
-
+    public static final int NUMBER_OF_EYES = 2;
+    public static final int MIN_WEIGHT = 1000;
+    public static final int MAX_WEIGHT = 9000;
     private double originWeight;
     private double weight;
     private double minWeight;
