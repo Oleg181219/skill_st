@@ -1,4 +1,4 @@
-public enum CatColor {
+public enum Color {
     Tortoiseshell,
     Agouti,
     Black,
