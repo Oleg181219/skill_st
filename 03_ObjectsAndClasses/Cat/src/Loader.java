@@ -1,7 +1,8 @@
-import java.util.Scanner;
 
 public class Loader {
+
     public static void main(String[] args) {
+
         Cat murka = new Cat();
         Cat vasiliy = new Cat();
         Cat pushok = new Cat();
@@ -10,9 +11,15 @@ public class Loader {
         Cat cat = new Cat();
         Cat evil = new Cat();
 
+        Cat first = getKitten();
+        Cat second = getKitten();
+        Cat third = getKitten();
+        System.out.println("first весит - " + first.getWeight());
+        System.out.println("second весит - " + second.getWeight());
+        System.out.println("third весит - " + third.getWeight());
 
         // выводим веса всех кошек
-        /*
+
         System.out.println(" murka весит - " + murka.getWeight());
         System.out.println(" vasiliy весит - " + vasiliy.getWeight());
         System.out.println(" pushok весит - " + pushok.getWeight());
@@ -22,7 +29,6 @@ public class Loader {
         System.out.println(" evil весит - " + evil.getWeight());
         System.out.println("================================================================");
 
-         */
 
         // кошка 1 покормлена. проверка в изменении веса
         System.out.println(" Вес кошки evil до приема пищи - " + evil.getWeight() + " gramm ");
@@ -34,7 +40,7 @@ public class Loader {
         cat.feed(500);
         System.out.println(" Кошка cat стала весить - " + cat.getWeight() + " gramm ");
         System.out.println("================================================================");
-
+/*
         // доводим бедного кота  kot до смерти от мяуканья. жесть пример. садисты
         while (kot.getStatus() != "Dead") {
             kot.meow();
@@ -42,6 +48,7 @@ public class Loader {
                 Cat.count--;
             }
         }
+
         System.out.println("====================");
         System.out.println(" Кот kot расстратил всю энергию, похудел и - " + kot.getStatus());
         Cat.count--;
@@ -85,8 +92,12 @@ public class Loader {
         System.out.println("====================");
         System.out.println("... и их осталось  " + Cat.getCount() + " (Агата Кристи) ");
 
-
-
-
+*/
     }
+
+    public static Cat getKitten(){
+        return new Cat(1000.00);
+    }
+
+
 }

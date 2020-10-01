@@ -2,33 +2,32 @@
 public class Cat {
 
     public static double count; //статическая переменная
-    public static final int NUMBER_OF_EYES = 2;
-    public static final int MIN_WEIGHT = 1000;
-    public static final int MAX_WEIGHT = 9000;
+    private static final int NUMBER_OF_EYES = 2;
+    private static final int MIN_WEIGHT = 1000;
+    private static final int MAX_WEIGHT = 9000;
     private double originWeight;
     private double weight;
-    private double minWeight;
-    private double maxWeight;
     private double summF;
+
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();
         originWeight = weight;
-        minWeight = 1000.0;
-        maxWeight = 9000.0;
         count++;
         System.out.println(count + " cat");
+    }
 
+    public Cat (double weight) {
+        this();
+        this.weight = weight;
     }
 
     public static double getCount() {
         return count;
     }
 
-
-
     public void meow() {
-        if (weight >= minWeight & weight <= maxWeight) {
+        if (getStatus().equals("Dead") | getStatus().equals("Exploded")) {
             weight = weight - 1;
             System.out.println("Meow");
         }
@@ -36,18 +35,17 @@ public class Cat {
     }
 
     public void pee() {
-        if (weight >= minWeight & weight <= maxWeight) {
+        if ( getStatus().equals("Dead") | getStatus().equals("Exploded")) {
             weight = weight - (weight / 33);
             System.out.println("pee");
         }
     }
 
     public void feed(int amount) {
-        if (weight >= minWeight & weight <= maxWeight) {
+        if (getStatus().equals("Dead") | getStatus().equals("Exploded")) {
             weight += amount;
             summF += amount;
         }
-
     }
 
     public double getFood() {
@@ -55,7 +53,7 @@ public class Cat {
     }
 
     public void drink(int amount) {
-        if (weight >= minWeight & weight <= maxWeight) {
+        if (getStatus().equals("Dead") | getStatus().equals("Exploded")) {
             weight = weight + amount;
         }
     }
@@ -65,9 +63,9 @@ public class Cat {
     }
 
     public String getStatus() {
-        if (weight < minWeight) {
+        if (weight < MIN_WEIGHT) {
             return "Dead";
-        } else if (weight > maxWeight) {
+        } else if (weight > MAX_WEIGHT) {
             return "Exploded";
         } else if (weight > originWeight) {
             return "Sleeping";
