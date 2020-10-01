@@ -49,9 +49,8 @@ public class Loader {
         System.out.println("====================");
 
         // Кормим кошку и расчитываем сумму съеденного корма
-        pushok.summFeed(pushok.feed(100));
-        pushok.summFeed(pushok.feed(200));
-        pushok.summFeed(pushok.feed(17));
+        pushok.feed(300);
+        pushok.feed(200);
         System.out.println( "Пушок сумарно съел - " + pushok.getFood() + " грамм еды");
         System.out.println("====================");
         // пушок ходит в туалет

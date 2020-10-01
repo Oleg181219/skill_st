@@ -1,9 +1,10 @@
 
-public class Cat
-{
+public class Cat {
+
+    public static double count; //статическая переменная
+
     private double originWeight;
     private double weight;
-
     private double minWeight;
     private double maxWeight;
     private double summF;
@@ -29,16 +30,13 @@ public class Cat
         System.out.println("pee");
     }
 
-    public int feed(int amount)
+    public void feed(int amount)
     {
-        weight = weight + amount;
-        return amount;
+        weight += amount;
+        summF+=amount;
+
     }
 
-    public double summFeed (int incomeFeed) {
-        summF = summF + incomeFeed;
-        return summF;
-    }
     public double getFood()
     {
         return summF;
