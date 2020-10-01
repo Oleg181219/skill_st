@@ -1,14 +1,14 @@
+import java.util.Scanner;
 
 public class Loader {
     public static void main(String[] args) {
         Cat murka = new Cat();
         Cat vasiliy = new Cat();
         Cat pushok = new Cat();
-        Cat dymok = new Cat();
-        Cat kot = new Cat();
-        Cat cat = new Cat();
-        Cat evil = new Cat();
-
+        Cat dymok = new Cat();  //used
+        Cat kot = new Cat();  //used
+        Cat cat = new Cat();   //used
+        Cat evil = new Cat();  //used
         // выводим веса всех кошек
         System.out.println(" murka весит - " + murka.getWeight());
         System.out.println(" vasiliy весит - " + vasiliy.getWeight());
@@ -41,11 +41,34 @@ public class Loader {
         // доводим кота dymok до состтояния дымка. садисты ( взрыв от переедания)
         while (dymok.getStatus() != "Exploded") {
             dymok.feed(200);
-            dymok.drink( 20);
+            dymok.drink(20);
             System.out.println("dymok немного перекусил и стал весить " + dymok.getWeight() + " gramm");
         }
         System.out.println("====================");
         System.out.println(" Кот dymok переел и в результате  - " + dymok.getStatus());
         System.out.println("====================");
+
+        // Кормим кошку и расчитываем сумму съеденного корма
+        pushok.summFeed(pushok.feed(100));
+        pushok.summFeed(pushok.feed(200));
+        pushok.summFeed(pushok.feed(17));
+        System.out.println( "Пушок сумарно съел - " + pushok.getFood() + " грамм еды");
+        System.out.println("====================");
+        // пушок ходит в туалет
+        System.out.println("====================");
+        System.out.println(" Пушок весит - " + pushok.getWeight());
+        pushok.pee();
+        pushok.pee();
+        pushok.pee();
+        pushok.pee();
+        pushok.pee();
+        pushok.pee();
+        System.out.println(" После походов в туалет Пушок стал весить - " + pushok.getWeight());
+        System.out.println("====================");
+
+
+
+
+
     }
 }
