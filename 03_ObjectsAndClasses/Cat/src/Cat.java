@@ -9,6 +9,16 @@ public class Cat {
     private double weight;
     private double summF;
 
+    Colour catColour = Colour.Agouti;
+
+    public void setCatColour (Colour catColour){
+       this.catColour = catColour;
+    }
+
+    public Colour getCatColour() {
+        return catColour;
+    }
+
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();

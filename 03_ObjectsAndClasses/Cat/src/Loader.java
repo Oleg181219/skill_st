@@ -40,6 +40,8 @@ public class Loader {
         cat.feed(500);
         System.out.println(" Кошка cat стала весить - " + cat.getWeight() + " gramm ");
         System.out.println("================================================================");
+
+
 /*
         // доводим бедного кота  kot до смерти от мяуканья. жесть пример. садисты
         while (kot.getStatus() != "Dead") {
