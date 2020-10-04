@@ -34,11 +34,9 @@ public class Loader {
         murka.setCatColour(Colour.Chocolate);
         System.out.println( murka.getCatColour() + "  " + murka.getWeight());
        //=====================================
-        murka.setNewColour(cat.getCatColour());
-        murka.setNewWeight(cat.getWeight());
-        System.out.println("================================");
-        System.out.println("кошка cat весит " + cat.getWeight() + " цвет кошки " + cat.getCatColour() );
-        System.out.println("кошка murka весит " + murka.getWeight() + " цвет кошки " + murka.getCatColour() );
+
+        Cat murkaCopy = murka.copyCat(); // делаем копию мурки и назыавем ее murkaCopy
+        System.out.println(murka + "\n" + murkaCopy); //проверяем получлась ли копия) Выоводи murka и murkaCopy
 
 /*
 
