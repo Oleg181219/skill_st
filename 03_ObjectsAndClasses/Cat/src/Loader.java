@@ -38,7 +38,7 @@ public class Loader {
         Cat murkaCopy = murka.copyCat(); // делаем копию мурки и назыавем ее murkaCopy
         System.out.println(murka + "\n" + murkaCopy); //проверяем получлась ли копия) Выоводи murka и murkaCopy
 
-/*
+
 
 
         System.out.println("====================");
@@ -84,7 +84,7 @@ public class Loader {
         System.out.println("====================");
         System.out.println("... и их осталось  " + Cat.getCount() + " (Агата Кристи) ");
 
-*/
+
     }
 
 
