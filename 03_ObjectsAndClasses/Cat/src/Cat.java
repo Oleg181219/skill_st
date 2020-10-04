@@ -9,7 +9,7 @@ public class Cat {
     private double weight;
     private double summF;
 
-    Colour catColour = Colour.Agouti;
+    private Colour catColour = Colour.Agouti;
 
     public void setCatColour (Colour catColour){
        this.catColour = catColour;
@@ -18,7 +18,21 @@ public class Cat {
     public Colour getCatColour() {
         return catColour;
     }
-
+    // сеттер и гетер на параметры кошки . вес и цвет
+// цвет кошки
+    public void setNewColour (Colour catColour){
+        this.catColour = catColour;
+    }
+    public Colour getNewColour(){
+        return catColour;
+    }
+ // вес кошки
+    public void setNewWeight (double catWeight){
+        this.weight = catWeight;
+    }
+    public double getNewWeight(){
+        return  weight;
+    }
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();

@@ -18,18 +18,6 @@ public class Loader {
         System.out.println("second весит - " + second.getWeight());
         System.out.println("third весит - " + third.getWeight());
 
-        // выводим веса всех кошек
-
-        System.out.println(" murka весит - " + murka.getWeight());
-        System.out.println(" vasiliy весит - " + vasiliy.getWeight());
-        System.out.println(" pushok весит - " + pushok.getWeight());
-        System.out.println(" dymok весит - " + dymok.getWeight());
-        System.out.println(" kot весит - " + kot.getWeight());
-        System.out.println(" cat весит - " + cat.getWeight());
-        System.out.println(" evil весит - " + evil.getWeight());
-        System.out.println("================================================================");
-
-
         // кошка 1 покормлена. проверка в изменении веса
         System.out.println(" Вес кошки evil до приема пищи - " + evil.getWeight() + " gramm ");
         evil.feed(300);
@@ -41,15 +29,19 @@ public class Loader {
         System.out.println(" Кошка cat стала весить - " + cat.getWeight() + " gramm ");
         System.out.println("================================================================");
 
+        //===========================
+        cat.setCatColour(Colour.Bicolor);
+        murka.setCatColour(Colour.Chocolate);
+        System.out.println( murka.getCatColour() + "  " + murka.getWeight());
+       //=====================================
+        murka.setNewColour(cat.getCatColour());
+        murka.setNewWeight(cat.getWeight());
+        System.out.println("================================");
+        System.out.println("кошка cat весит " + cat.getWeight() + " цвет кошки " + cat.getCatColour() );
+        System.out.println("кошка murka весит " + murka.getWeight() + " цвет кошки " + murka.getCatColour() );
 
 /*
-        // доводим бедного кота  kot до смерти от мяуканья. жесть пример. садисты
-        while (kot.getStatus() != "Dead") {
-            kot.meow();
-            if (dymok.getStatus() == "Exploded"){
-                Cat.count--;
-            }
-        }
+
 
         System.out.println("====================");
         System.out.println(" Кот kot расстратил всю энергию, похудел и - " + kot.getStatus());
@@ -96,6 +88,7 @@ public class Loader {
 
 */
     }
+
 
     public static Cat getKitten(){
         return new Cat(1000.00);
