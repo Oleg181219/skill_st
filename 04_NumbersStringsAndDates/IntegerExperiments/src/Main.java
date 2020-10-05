@@ -11,6 +11,12 @@ public class Main
         int i1 = sumDigits2(12345);
         int j1 = sumDigits2(10);
         int k1 = sumDigits2(876547865);
+
+        char h = '9';
+        int q1 = Character.getNumericValue(h); // возвращает int значение.
+        System.out.println(q1);
+        int q2 = Character.digit(h , 10); // возвращает цифровое значение
+        System.out.println(q2);
     }
 
     public static Integer sumDigits(Integer number) { //публичный, статичный, класс, название метода. ( входные параметры типа Integer)
