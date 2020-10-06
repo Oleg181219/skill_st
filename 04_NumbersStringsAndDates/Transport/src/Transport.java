@@ -1,7 +1,7 @@
 public class Transport {
 
     public static void main(String[] args) {
-        double numberOfBox = 1001;
+        double numberOfBox = 1500;
         int car = 0;
         int cont = 0;
         int box = 0;
@@ -17,9 +17,10 @@ public class Transport {
                 cont++;
                 System.out.println("\t" + "Контейнер - " + cont);
             }
-            if (box <= numberOfBox) {
-                System.out.println("\t" + "\t" + "Коробка - " + box);
+            if (box <= (numberOfBox - 1)) {
                 box++;
+                System.out.println("\t" + "\t" + "Коробка - " + box);
+
             }
 
         }
