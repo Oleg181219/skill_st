@@ -4,8 +4,8 @@ public class Alfabet {
 
         String alfabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int stringLenght = alfabet.length();
-        for (int i = 0; i< stringLenght; i++){
-            System.out.println("Буква (" + alfabet.charAt(i) + ") имеет код =" + ((int)(alfabet.charAt(i))));
+        for (int i = 0; i < stringLenght; i++) {
+            System.out.println("Буква (" + alfabet.charAt(i) + ") имеет код =" + ((int) (alfabet.charAt(i))));
         }
 
     }
