@@ -1,16 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 
 public class fio {
-    private static final int numSpace = 2;
+    //private static final int numSpace = 2;
 
 
     public static void main(String[] args) throws IOException {
-        String space = new String(" ");
-
-
+        //String space = new String(" ");
         while (true) {
             System.out.println("Введите Фамилию Имя Отчество:");
             String incomingString = ((new BufferedReader(new InputStreamReader(System.in))).readLine()).trim();
@@ -19,6 +18,27 @@ public class fio {
                 continue;
             }
 
+            Pattern p = Pattern.compile("\\s+");
+            String[] newString = p.split(incomingString);
+            for( int i = 0; i < newString.length; i++){
+                if( i == 0){
+                    newString[i] = newString[i].trim();
+                    newString[i] = newString[i].substring(0,1).toUpperCase() + newString[i].substring(1).toLowerCase();
+                    System.out.println("Фамилия: " + newString[i]);
+                }
+                if( i == 1){
+                    newString[i] = newString[i].trim();
+                    newString[i] = newString[i].substring(0,1).toUpperCase() + newString[i].substring(1).toLowerCase();
+                    System.out.println("Имя: " + newString[i]);
+                }
+                if( i == 2){
+                    newString[i] = newString[i].trim();
+                    newString[i] = newString[i].substring(0,1).toUpperCase() + newString[i].substring(1).toLowerCase();
+                    System.out.println("Отчество: " + newString[i]);
+                }
+            }
+
+/*
             int space1 = incomingString.indexOf(space);
             String familya = incomingString.substring(0, space1).trim();  // обрезаем лишние пробелы
             String newFamilya = familya.substring(0,1).toUpperCase() + familya.substring(1).toLowerCase(); // возвращаем первый символ в верхнем регистре остальные в нижнем
@@ -30,6 +50,7 @@ public class fio {
             String patronymic = incomingString.substring(space2, incomingString.length()).trim();
             String newPatronymic = patronymic.substring(0,1).toUpperCase() + patronymic.substring(1).toLowerCase();
             System.out.println("Отчество: " + newPatronymic);
+*/
 
             break;
         }
