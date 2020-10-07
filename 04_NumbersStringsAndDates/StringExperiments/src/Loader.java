@@ -19,6 +19,20 @@ public class Loader {
 
         int summ = Integer.parseInt(res1) + Integer.parseInt(res3) + Integer.parseInt(res2);
         System.out.println(summ);
+
+        String newText = text.replaceAll("[^0-9]", " ");
+        System.out.println(newText);
+        String[] sent = newText.split("\\s+");
+        int newSumm = 0;
+        for (int i = 1; i < sent.length; i++) {
+            sent[i] = sent[i].trim();
+            /*System.out.println(sent[i]);
+            System.out.println(sent[i].length());*/
+            newSumm += Integer.parseInt(sent[i]);
+
+        }
+        System.out.println(" сумма зарплат = " + newSumm + " руб.");
     }
+
 
 }
