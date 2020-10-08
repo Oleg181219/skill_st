@@ -12,8 +12,8 @@ public class Mnemonic {
             mnem[mnem.length - 1 - i] = bufer;
             i++;
         }
-        for (int j = 0; j < mnem.length; j++) {
-            System.out.print(" " + mnem[j]);
+        for (String s : mnem) {
+            System.out.print(" " + s);
         }
     }
 }
