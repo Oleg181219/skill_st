@@ -4,7 +4,7 @@ public class privateCard {
 
 
     public static String searchAndReplaceDiamonds(String incomingNumber) {
-        String rep = "<***>";
+        String rep = "***";
         String replace = "";
         String transformNumber = incomingNumber;
         while (transformNumber.lastIndexOf("<") != -1) {
@@ -14,6 +14,7 @@ public class privateCard {
                     incomingNumber = incomingNumber.replace(replace, rep);
                     transformNumber = transformNumber.substring(max + 1);
             }
+        incomingNumber = incomingNumber.replaceAll("\\s+", "");// убирает пробелы.
         return incomingNumber;
     }
 
