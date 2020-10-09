@@ -17,8 +17,8 @@ public class xsign {
 
 
         for (String[] strings : array) {
-            for (int j = 0; j < strings.length; j++) {
-                System.out.print(strings[j] + " ");
+            for (String string : strings) {
+                System.out.print(string + " ");
             }
             System.out.println();
         }
