@@ -10,7 +10,7 @@ public class licenseplate {
         String zero = "000";
         String zeroNum = "0";
 
-        ArrayList<Integer> region = new ArrayList<>();
+        //ArrayList<Integer> region = new ArrayList<>();
         ArrayList<String> arrayPlate = new ArrayList<>();
         for (int reg = 1; reg <= 199; reg++) {
             for (int letters1 = 1040; letters1 <= 1061; letters1++) {
@@ -61,9 +61,10 @@ public class licenseplate {
             }
         }
         Collections.sort(arrayPlate);
+
         Set<String> hashSet = new HashSet<>(arrayPlate);
         Set<String> treeSet = new TreeSet<>(arrayPlate);
-
+        System.out.println(treeSet);
         System.out.println("Длинна листа = " + arrayPlate.size());
         System.out.println("длина HashSet = " + hashSet.size());
         System.out.println("длина TreeSet = " + treeSet.size());
