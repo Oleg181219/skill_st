@@ -39,8 +39,9 @@ public class bankAccount {
         return depBalance;
     }
 
-    public static void setDepBalance(BigDecimal depBalance) {
+    public static BigDecimal setDepBalance(BigDecimal depBalance) {
         bankAccount.depBalance = depBalance;
+        return depBalance;
     }
 }
 
