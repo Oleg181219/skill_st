@@ -4,23 +4,24 @@ public class main {
 
 
     public static void main(String[] args) {
-        BigDecimal moneyToDeposit = new BigDecimal("2000");
+        BigDecimal moneyToMain = new BigDecimal("20000");
+        BigDecimal moneyToCard = new BigDecimal("30000");
         BigDecimal moneyToWithdraw = new BigDecimal("152.9");
-        BigDecimal moneyToDepositDeposit = new BigDecimal("5000");
+        BigDecimal moneyToDeposit = new BigDecimal("5000");
 
-        bankAccount.deposit(moneyToDeposit);
-        bankAccount.deposit(moneyToDeposit);
-
+        bankAccount.deposit(moneyToMain);
+        System.out.println("Баланс счета = " + bankAccount.getBalance());
         bankAccount.withdraw(moneyToWithdraw);
-        bankAccount.withdraw(moneyToWithdraw);
+        System.out.println("Баланс счета = " + bankAccount.getBalance());
 
-        System.out.println("Баланс счета = " + bankAccount.balance);
 
-        cardAccount.withdraw(moneyToWithdraw);// съем через карточку со счета, общего.
-        System.out.println("Баланс счета = " + bankAccount.balance);
-        System.out.println("Баланс DEPO счета = " + depositAccount.balanceDeposit);
-        depositAccount.depositDeposit(moneyToDepositDeposit);
-        System.out.println("Баланс DEPO счета = " + depositAccount.balanceDeposit);
-        depositAccount.withdrawDeposit(moneyToWithdraw);
+        cardAccount.setCardBalance(moneyToCard);
+        System.out.println("Деньги на карте " + cardAccount.getCardBalance());
+        cardAccount.withdraw(moneyToWithdraw);
+        System.out.println("Баланс счета Card = " + bankAccount.getCardBalance());
+        bankAccount.setCardBalance(bankAccount.getCardBalance().add(moneyToCard));
+        System.out.println("Баланс счета Card = " + bankAccount.getCardBalance());
+        System.out.println("Баланс счета = " + bankAccount.getBalance());
+
     }
 }

@@ -2,24 +2,45 @@ import java.math.BigDecimal;
 
 public class bankAccount {
 
-    static BigDecimal deposit = new BigDecimal("0");
-    static BigDecimal balance = new BigDecimal("0");
+  //  private static BigDecimal deposit = new BigDecimal("0");
+    private static BigDecimal balance = new BigDecimal("0");
+    private static BigDecimal cardBalance = new BigDecimal("0");
+    private static BigDecimal depBalance = new BigDecimal("0");
 
 
     public static void withdraw(BigDecimal outMoney) {
-        System.out.println("Прошло снятие денежных средств в размере " + outMoney);
-        bankAccount.accountBalance(deposit.subtract(outMoney).subtract(deposit));
+        System.out.println("Минус на главный " + outMoney);
+       balance =  balance.subtract(outMoney);
     }
 
     public static BigDecimal deposit(BigDecimal inMoney) {
-        System.out.println("Прошло пополнение денежных средств в размере " + inMoney);
-        bankAccount.accountBalance(inMoney);
-        return deposit;
+        System.out.println("Плюс на главный " + inMoney);
+        balance= balance.add(inMoney);
+        return balance;
     }
 
-    public static BigDecimal accountBalance(BigDecimal moneyMoving) {
-        balance = balance.add(moneyMoving);
+    public static BigDecimal getBalance() {
         return balance;
+    }
+
+    public static void setBalance(BigDecimal balance) {
+        bankAccount.balance = balance;
+    }
+
+    public static BigDecimal getCardBalance() {
+        return cardBalance;
+    }
+
+    public static void setCardBalance(BigDecimal cardBalance) {
+        bankAccount.cardBalance = cardBalance;
+    }
+
+    public static BigDecimal getDepBalance() {
+        return depBalance;
+    }
+
+    public static void setDepBalance(BigDecimal depBalance) {
+        bankAccount.depBalance = depBalance;
     }
 }
 
