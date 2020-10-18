@@ -2,19 +2,20 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 
 public class DepositAccount extends BankAccount {
-    private static Calendar blockDay;
+    private Calendar blockDay;
 
 
-    public static void inToDeposit(BigDecimal inMoney) {
+    public void inToDeposit(BigDecimal inMoney) {
         System.out.println("Прошло пополнение депозита в размере " + inMoney);
-        Calendar.getInstance().add(Calendar.MONTH,1);
-        BankAccount.setDepBalance(BankAccount.getDepBalance().add(inMoney));
+        blockDay = Calendar.getInstance();
+        blockDay.add(Calendar.MONTH, 1);
+        this.setDepBalance(this.getDepBalance().add(inMoney));
     }
 
-    public static void withdrawDeposit(BigDecimal outMoney) {
-        if (Calendar.getInstance().after(blockDay)) {
+    public void withdrawDeposit(BigDecimal outMoney) {
+        if (Calendar.getInstance().before(blockDay)) {
             System.out.println("Прошло снятие денежных средств с депозита в размере " + outMoney);
-        }
-        System.out.println("Вы не можете снять сейчас средства с депозита, приходите через месяц");
+        } else
+            System.out.println("Вы не можете снять сейчас средства с депозита, приходите через месяц");
     }
 }
