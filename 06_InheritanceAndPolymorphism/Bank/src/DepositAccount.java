@@ -1,18 +1,18 @@
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 public class DepositAccount extends BankAccount {
-    private static long blockTime = 0;
-    private static final long MONTH_BLOCK = 2592000000L; // 30 суток в милисекундах.
+    private static Calendar blockDay;
 
 
     public static void inToDeposit(BigDecimal inMoney) {
         System.out.println("Прошло пополнение депозита в размере " + inMoney);
-        blockTime = System.currentTimeMillis() + MONTH_BLOCK;
+        Calendar.getInstance().add(Calendar.MONTH,1);
         BankAccount.setDepBalance(BankAccount.getDepBalance().add(inMoney));
     }
 
     public static void withdrawDeposit(BigDecimal outMoney) {
-        if (System.currentTimeMillis() > blockTime) {
+        if (Calendar.getInstance().after(blockDay)) {
             System.out.println("Прошло снятие денежных средств с депозита в размере " + outMoney);
         }
         System.out.println("Вы не можете снять сейчас средства с депозита, приходите через месяц");
