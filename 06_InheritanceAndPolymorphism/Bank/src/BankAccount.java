@@ -1,8 +1,8 @@
 import java.math.BigDecimal;
 
-public class bankAccount {
+public class BankAccount {
 
-  //  private static BigDecimal deposit = new BigDecimal("0");
+
     private static BigDecimal balance = new BigDecimal("0");
     private static BigDecimal cardBalance = new BigDecimal("0");
     private static BigDecimal depBalance = new BigDecimal("0");
@@ -24,7 +24,7 @@ public class bankAccount {
     }
 
     public static void setBalance(BigDecimal balance) {
-        bankAccount.balance = balance;
+        BankAccount.balance = balance;
     }
 
     public static BigDecimal getCardBalance() {
@@ -32,16 +32,15 @@ public class bankAccount {
     }
 
     public static void setCardBalance(BigDecimal cardBalance) {
-        bankAccount.cardBalance = cardBalance;
+        BankAccount.cardBalance = cardBalance;
     }
 
     public static BigDecimal getDepBalance() {
         return depBalance;
     }
 
-    public static BigDecimal setDepBalance(BigDecimal depBalance) {
-        bankAccount.depBalance = depBalance;
-        return depBalance;
+    public static void setDepBalance(BigDecimal depBalance) {
+        BankAccount.depBalance = depBalance;
     }
 }
 

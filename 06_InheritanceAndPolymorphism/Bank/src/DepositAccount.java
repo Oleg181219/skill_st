@@ -1,14 +1,14 @@
 import java.math.BigDecimal;
 
-public class depositAccount extends bankAccount {
+public class DepositAccount extends BankAccount {
     private static long blockTime = 0;
-    private static final long MONTH_BLOCK = 2592000000L;
+    private static final long MONTH_BLOCK = 2592000000L; // 30 суток в милисекундах.
 
 
     public static void inToDeposit(BigDecimal inMoney) {
         System.out.println("Прошло пополнение депозита в размере " + inMoney);
         blockTime = System.currentTimeMillis() + MONTH_BLOCK;
-        bankAccount.setDepBalance(inMoney);
+        BankAccount.setDepBalance(BankAccount.getDepBalance().add(inMoney));
     }
 
     public static void withdrawDeposit(BigDecimal outMoney) {

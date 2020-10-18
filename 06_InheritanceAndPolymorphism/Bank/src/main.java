@@ -10,23 +10,23 @@ public class main {
         BigDecimal moneyToDeposit = new BigDecimal("5000");
         BigDecimal moneyToCardWithdraw = new BigDecimal("1000");
 
-        bankAccount.deposit(moneyToMain);
-        System.out.println("Баланс счета = " + bankAccount.getBalance());
-        bankAccount.withdraw(moneyToWithdraw);
-        System.out.println("Баланс счета = " + bankAccount.getBalance());
+        BankAccount.deposit(moneyToMain);
+        System.out.println("Баланс счета = " + BankAccount.getBalance());
+        BankAccount.withdraw(moneyToWithdraw);
+        System.out.println("Баланс счета = " + BankAccount.getBalance());
 
 
-        cardAccount.setCardBalance(moneyToCard);
-        System.out.println("Деньги на карте " + cardAccount.getCardBalance());
-        cardAccount.withdraw(moneyToCardWithdraw);
-        System.out.println("Баланс счета Card = " + bankAccount.getCardBalance());
-        bankAccount.setCardBalance(bankAccount.getCardBalance().add(moneyToCard));
-        System.out.println("Баланс счета Card = " + bankAccount.getCardBalance());
-        System.out.println("Баланс счета = " + bankAccount.getBalance());
+        CardAccount.setCardBalance(moneyToCard);
+        System.out.println("Деньги на карте " + CardAccount.getCardBalance());
+        CardAccount.withdraw(moneyToCardWithdraw);
+        System.out.println("Баланс счета Card = " + BankAccount.getCardBalance());
+        BankAccount.setCardBalance(BankAccount.getCardBalance().add(moneyToCard));
+        System.out.println("Баланс счета Card = " + BankAccount.getCardBalance());
 
-        depositAccount.inToDeposit(bankAccount.setDepBalance(moneyToDeposit));
-        System.out.println(bankAccount.getDepBalance());
-        depositAccount.withdrawDeposit(bankAccount.setDepBalance(moneyToCardWithdraw));
+        DepositAccount.inToDeposit(moneyToDeposit);
+        System.out.println(BankAccount.getDepBalance());
+        DepositAccount.withdrawDeposit(moneyToWithdraw);
+        System.out.println(BankAccount.getDepBalance());
 
     }
 }
