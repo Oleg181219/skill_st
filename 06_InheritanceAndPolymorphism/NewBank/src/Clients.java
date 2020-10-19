@@ -4,6 +4,8 @@ public abstract class Clients {
 
     private BigDecimal balance = new BigDecimal("0");
 
+    public abstract void info();
+
 
     public abstract void deposit(BigDecimal ammount);
 
