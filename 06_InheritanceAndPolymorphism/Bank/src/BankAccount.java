@@ -2,11 +2,7 @@ import java.math.BigDecimal;
 
 public class BankAccount {
 
-
     private BigDecimal balance = new BigDecimal("0");
-    private BigDecimal cardBalance = new BigDecimal("0");
-    private BigDecimal depBalance = new BigDecimal("0");
-
 
     public void withdraw(BigDecimal outMoney) {
         System.out.println("Минус на главный " + outMoney);
@@ -19,6 +15,14 @@ public class BankAccount {
         return balance;
     }
 
+    boolean send(BankAccount receiver, BigDecimal amount) {
+        this.setBalance(this.getBalance().subtract(amount));
+        receiver.setBalance(receiver.getBalance().add(amount));
+        return true;
+    }
+
+
+
     public BigDecimal getBalance() {
         return balance;
     }
@@ -26,23 +30,5 @@ public class BankAccount {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
-
-    public BigDecimal getCardBalance() {
-        return cardBalance;
-    }
-
-    public void setCardBalance(BigDecimal cardBalance) {
-        this.cardBalance = cardBalance;
-    }
-
-    public BigDecimal getDepBalance() {
-        return depBalance;
-    }
-
-    public void setDepBalance(BigDecimal depBalance) {
-        this.depBalance = depBalance;
-    }
-
-
 }
 
