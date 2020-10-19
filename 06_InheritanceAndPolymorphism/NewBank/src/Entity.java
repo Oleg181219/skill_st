@@ -4,28 +4,31 @@ public class Entity extends Clients {
     private BigDecimal balance = new BigDecimal("0");
     private BigDecimal percent = new BigDecimal("0.01");
 
-    public  void info(){
+    void info() {
         System.out.println("Счет юридического лица" +
                 "\nПополнение без коммисии \nСнятие 1% коммисии \nБаланс счета = " + getBalance());
     }
 
-    public void deposit(BigDecimal amount) {
+    void deposit(BigDecimal amount) {
         this.balance = getBalance().add(amount);
     }
 
-    public void withdraw(BigDecimal amount) {
-        this.balance = getBalance().add(amount).subtract(amount.multiply(percent));
+    void withdraw(BigDecimal amount) {
+        amount.add(amount.multiply(percent));
+        if (amount.add(amount.multiply(percent)).compareTo(getBalance()) >= 0) {
+            this.balance = getBalance().subtract(amount).subtract(amount.multiply(percent));
+        }
     }
 
-    public void balance() {
+    void balance() {
         System.out.println("Текущий баланс счета (юр.лицо) = " + balance);
     }
 
-    public BigDecimal getBalance() {
+    BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 }

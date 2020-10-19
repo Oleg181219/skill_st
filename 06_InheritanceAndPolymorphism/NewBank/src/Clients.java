@@ -4,20 +4,20 @@ public abstract class Clients {
 
     private BigDecimal balance = new BigDecimal("0");
 
-    public abstract void info();
+    abstract void info();
 
 
-    public abstract void deposit(BigDecimal ammount);
+    abstract void deposit(BigDecimal ammount);
 
-    public abstract void withdraw(BigDecimal ammount);
+    abstract void withdraw(BigDecimal ammount);
 
-    public abstract void balance();
+    abstract void balance();
 
-    public BigDecimal getBalance() {
+    BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 }
