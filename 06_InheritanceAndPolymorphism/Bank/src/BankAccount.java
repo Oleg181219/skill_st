@@ -15,12 +15,11 @@ public class BankAccount {
         return balance;
     }
 
-    boolean send(BankAccount receiver, BigDecimal amount) {
+    public boolean send(BankAccount receiver, BigDecimal amount) {
         this.setBalance(this.getBalance().subtract(amount));
         receiver.setBalance(receiver.getBalance().add(amount));
         return true;
     }
-
 
 
     public BigDecimal getBalance() {
