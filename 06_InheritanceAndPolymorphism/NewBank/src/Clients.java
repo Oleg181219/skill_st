@@ -1,6 +1,6 @@
 import java.math.BigDecimal;
 
-public abstract class Clients {
+abstract class Clients {
 
     private BigDecimal balance = new BigDecimal("0");
 
