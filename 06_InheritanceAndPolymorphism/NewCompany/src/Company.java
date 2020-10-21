@@ -25,7 +25,8 @@ public class Company {
 
     }*/
     public BigDecimal getIncoming() {
-        System.out.println(incoming);
+        //System.out.println(incoming);
+
         return incoming;
     }
 

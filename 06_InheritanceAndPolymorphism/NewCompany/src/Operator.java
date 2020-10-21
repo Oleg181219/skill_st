@@ -9,8 +9,10 @@ public class Operator implements Employee{
         return salary;
     }
 
-
-
+    @Override
+    public BigDecimal getOklad() {
+        return null;
+    }
 
 
 }

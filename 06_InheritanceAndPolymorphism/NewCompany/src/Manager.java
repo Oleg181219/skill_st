@@ -1,25 +1,26 @@
 import java.math.BigDecimal;
+import java.lang.Math;
 
 public class Manager implements Employee {
-    //private BigDecimal salary = new BigDecimal(13500);
+
     private double salaryDouble;
-    private double oklad = 15000;
+    private BigDecimal oklad = new BigDecimal(15000);
     private double inco;
-    private BigDecimal incoming = new BigDecimal(0);
+
 
     @Override
     public BigDecimal getMonthSalary() {
-        Company company = new Company();
-        inco = (115000 + Math.random() * 35000);
-        // суммирование дохода от Manager
-        BigDecimal incom = new BigDecimal(inco).setScale(0,BigDecimal.ROUND_HALF_UP);
-        company.setIncoming(company.getIncoming().add(incom));
-        // расчет зп Manager
-        salaryDouble = oklad + inco * 0.05;
-        BigDecimal salary = new BigDecimal(salaryDouble).setScale(0,BigDecimal.ROUND_HALF_UP);
-        System.out.println(salary);
+        inco = 0.05 * (115000 + Math.random() * 35000);// вход денег от менеджеров в double
+        BigDecimal incom =  new BigDecimal(inco);
+        BigDecimal salary = oklad.add(incom).setScale(0, BigDecimal.ROUND_HALF_UP);
         return salary;
     }
 
+    public BigDecimal getOklad() {
+        return oklad;
+    }
 
+    public void setOklad(BigDecimal oklad) {
+        this.oklad = oklad;
+    }
 }
