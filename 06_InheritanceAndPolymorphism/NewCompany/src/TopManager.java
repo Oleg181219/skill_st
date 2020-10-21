@@ -5,6 +5,7 @@ public class TopManager implements Employee {
 
     @Override
     public BigDecimal getMonthSalary() {
+
         return salary;
     }
 

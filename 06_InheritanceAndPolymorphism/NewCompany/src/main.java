@@ -9,21 +9,25 @@ public class main {
         Employee topManager = new TopManager();
         Employee manager = new Manager();
         ArrayList<BigDecimal> company = new ArrayList<>();
-        Company companyMain = new Company();
-        BigDecimal sum = new BigDecimal(0);
+
 // создание  Manager
-        for ( int j = 0; j<80; j++){
+        for (int j = 0; j < 80; j++) {
             company.add(manager.getMonthSalary());
         }
 // создание Operator
         for (int i = 0; i < 50; i++) {
             company.add(operator.getMonthSalary());
-
+        }
+// создание тор
+        for (int i = 0; i < 10; i++) {
+            company.add(topManager.getMonthSalary());
         }
 
         System.out.println(company.size());
         System.out.println(company);
 
+       // System.out.println(company.);
 
     }
+
 }

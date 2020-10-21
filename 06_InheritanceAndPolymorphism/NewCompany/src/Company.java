@@ -2,11 +2,13 @@ import java.math.BigDecimal;
 
 public class Company {
 
-    void hire() {
+    private BigDecimal incoming = new BigDecimal(0);
+/*
+    void hire (Employee emp){
 
     }
 
-    void hireAll() {
+    public void hireAll() {
 
     }
 
@@ -15,13 +17,20 @@ public class Company {
     }
 
 
-
-    void getTopSalaryStaff(int count){
-
-    }
-
-    void getLowestSalaryStaff(int count){
+    void getTopSalaryStaff(int count) {
 
     }
 
+    void getLowestSalaryStaff(int count) {
+
+    }*/
+    public BigDecimal getIncoming() {
+        System.out.println(incoming);
+        return incoming;
+    }
+
+    public void setIncoming(BigDecimal incoming) {
+        this.incoming = incoming;
+    }
 }
+
