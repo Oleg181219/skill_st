@@ -1,6 +1,6 @@
 import java.math.BigDecimal;
 
-public class Entrepreneur extends Clients {
+class Entrepreneur extends Clients {
     private BigDecimal balance = new BigDecimal("0");
     private BigDecimal percentMax = new BigDecimal("0.01");
     private BigDecimal percentMin = new BigDecimal("0.005");
