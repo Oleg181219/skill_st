@@ -7,6 +7,13 @@ public class Manager implements Employee {
     private BigDecimal oklad = new BigDecimal(15000);
     private double inco;
 
+    public BigDecimal getOklad() {
+        return oklad;
+    }
+
+    public void setOklad(BigDecimal oklad) {
+        this.oklad = oklad;
+    }
 
     @Override
     public BigDecimal getMonthSalary() {
@@ -16,11 +23,7 @@ public class Manager implements Employee {
         return salary;
     }
 
-    public BigDecimal getOklad() {
-        return oklad;
-    }
 
-    public void setOklad(BigDecimal oklad) {
-        this.oklad = oklad;
-    }
+
+
 }
