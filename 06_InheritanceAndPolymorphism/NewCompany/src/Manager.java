@@ -3,9 +3,7 @@ import java.lang.Math;
 
 public class Manager implements Employee {
 
-    private double salaryDouble;
-    private BigDecimal oklad = new BigDecimal(15000);
-    private double inco;
+    private BigDecimal oklad = new BigDecimal(30000);
 
     public BigDecimal getOklad() {
         return oklad;
@@ -17,13 +15,11 @@ public class Manager implements Employee {
 
     @Override
     public BigDecimal getMonthSalary() {
-        inco = 0.05 * (115000 + Math.random() * 35000);// вход денег от менеджеров в double
-        BigDecimal incom =  new BigDecimal(inco);
+        double inco = 0.05 * (115000 + (Math.random() * 25000));
+        BigDecimal incom = new BigDecimal(inco);
         BigDecimal salary = oklad.add(incom).setScale(0, BigDecimal.ROUND_HALF_UP);
         return salary;
     }
-
-
 
 
 }
