@@ -1,4 +1,4 @@
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 
 public class main {
@@ -19,7 +19,6 @@ public class main {
         for (int j = 0; j < numberOfManagers; j++) {
             managers.add(manager);
         }
-        company.incoming(managers, numberOfManagers);
         for (int k = 0; k < numberOfTopManagers; k++) {
             topManagers.add(topManager);
         }
@@ -27,9 +26,13 @@ public class main {
             operators.add(operator);
         }
 // ===========================================
+       /* for (int m = 0; m < numberOfManagers; m++) {
+            System.out.println(managers.get(m).getMonthSalary());
+        }*/
         company.hireAll(companyMain, managers, topManagers, operators);
+        company.hire(companyMain, operator);
 // ===========================================
-        System.out.println("Сотрудников в main компании =" + companyMain.size());
+        System.out.println(companyMain.size());
         System.out.println("Общий доход компании = " + company.getIncoming() + " тугриков ");
 
     }
