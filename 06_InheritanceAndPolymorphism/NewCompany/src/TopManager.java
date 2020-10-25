@@ -1,12 +1,8 @@
-
-
 public class TopManager implements Employee {
-    private double salary = 30000;
-    private double salaryMax = 75000;
-    private double limit = 10000000;
-    private double monthSalary= 0;
-
-
+    private final double salary = 30000;
+    private final double salaryMax = 75000;
+    private final double limit = 10000000;
+    private final double monthSalary= 0;
 
     @Override
     public double getMonthSalary() {
@@ -15,12 +11,8 @@ public class TopManager implements Employee {
 
     @Override
     public double setMonthSalary() {
-        Company company = new Company();
-        if (company.getIncoming() > limit) {
+        if (Company.getIncoming() > limit)
             return salaryMax;
-        }
         return salary;
     }
-
-
 }

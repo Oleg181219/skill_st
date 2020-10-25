@@ -1,8 +1,6 @@
-
-
 public class Operator implements Employee {
 
-    private double monthSalary= 33000;
+    private final double monthSalary= 33000;
 
     @Override
     public double getMonthSalary() {
@@ -13,7 +11,4 @@ public class Operator implements Employee {
     public double setMonthSalary() {
         return monthSalary;
     }
-
-
-
 }

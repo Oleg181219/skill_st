@@ -1,51 +1,24 @@
 import java.util.ArrayList;
 
 public class Company {
-    //Employee manager = new Manager();
-    ArrayList<Employee> companyMain = new ArrayList<>();
 
+    ArrayList<Employee> employeeList = new ArrayList<>();
+    private static double incoming;
 
-    double incoming;
-
-    public double getIncoming() {
+    public static double getIncoming() {
         return incoming;
     }
 
-
-    public void setIncoming(double incoming) {
-        this.incoming = incoming;
+    public static void setIncoming(double incoming) {
+        Company.incoming = incoming;
     }
 
-    public ArrayList<Employee> hire(ArrayList<Employee> company, Employee emp) {
-        company.add(emp);
-        return companyMain;
+    public void hire(Employee emp) {
+        employeeList.add(emp);
     }
 
-    public ArrayList<Employee> hireAll(ArrayList<Employee> company, ArrayList<Employee> managers, ArrayList<Employee> topmanagers,
-                                       ArrayList<Employee> operators) {
-        company.addAll(managers);
-        company.addAll(topmanagers);
-        company.addAll(operators);
-        System.out.println(" uiu=" + incoming);
-        return companyMain;
+    public void hireAll(ArrayList<Employee> empl) {
+        employeeList.addAll(empl);
     }
-
-
-/*
-
-    void fire() {
-
-    }
-
-
-    void getTopSalaryStaff(int count) {
-
-    }
-
-    void getLowestSalaryStaff(int count) {
-
-    }
-*/
-
 }
 
