@@ -1,15 +1,11 @@
 import java.util.ArrayList;
 
 public class Company {
-
+    //Employee manager = new Manager();
     ArrayList<Employee> companyMain = new ArrayList<>();
-    ArrayList<Employee> managers = new ArrayList<>();
-    ArrayList<Employee> operators = new ArrayList<>();
-    ArrayList<Employee> topManagers = new ArrayList<>();
-    Employee operator = new Operator();
-    Employee topManager = new TopManager();
-    Employee manager = new Manager();
-    double incoming =0;
+
+
+    double incoming;
 
     public double getIncoming() {
         return incoming;
@@ -22,7 +18,6 @@ public class Company {
 
     public ArrayList<Employee> hire(ArrayList<Employee> company, Employee emp) {
         company.add(emp);
-        System.out.println(" by="+ incoming);
         return companyMain;
     }
 
@@ -31,7 +26,7 @@ public class Company {
         company.addAll(managers);
         company.addAll(topmanagers);
         company.addAll(operators);
-        System.out.println(" uiu="+ incoming);
+        System.out.println(" uiu=" + incoming);
         return companyMain;
     }
 

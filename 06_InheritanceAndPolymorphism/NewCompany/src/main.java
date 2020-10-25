@@ -5,16 +5,19 @@ public class main {
 
     public static void main(String[] args) {
         Company company = new Company();
-        int numberOfManagers = 10;
+        //Company manager = new Company();
+        int numberOfManagers = 80;
         int numberOfOperator = 180;
         int numberOfTopManagers = 10;
-
+        ArrayList<Employee> operators = new ArrayList<>();
+        ArrayList<Employee> topManagers = new ArrayList<>();
+        ArrayList<Employee> managers = new ArrayList<>();
 //============================================
 
         for (int j = 0; j < numberOfManagers; j++) {
-            System.out.println("1-" + company.manager.setMonthSalary());
-            System.out.println("2-" + company.manager.getMonthSalary());
-            company.managers.add(j, company.manager);
+            Employee manager = new Manager();
+            manager.setMonthSalary();
+            managers.add(manager);
 
         }
       /*  for (int k = 0; k < numberOfTopManagers; k++) {
@@ -27,16 +30,16 @@ public class main {
         }*/
 // ===========================================
         for (int m = 0; m < numberOfManagers; m++) {
-            System.out.println("managers.get(" + m + ").MonthSalary() -" + company.managers.get(m).getMonthSalary());
+            System.out.println("managers.get(" + m + ").MonthSalary() -" + managers.get(m).getMonthSalary());
         }
 
       /*  company.hireAll(company.companyMain, company.managers, company.topManagers, company.operators);
         company.hire(company.companyMain, company.operator);*/
 
 // ===========================================
-       /* System.out.println(company.companyMain.size());
+       //System.out.println(company.companyMain.size());
         System.out.println("Общий доход компании = " + company.getIncoming() + " тугриков ");
-        System.out.println("managers.get(1).getMonthSalary()=");*/
+
 
 
     }

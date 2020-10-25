@@ -1,4 +1,4 @@
-import java.math.BigDecimal;
+
 
 public class TopManager implements Employee {
     private double salary = 30000;
@@ -20,11 +20,6 @@ public class TopManager implements Employee {
             return salaryMax;
         }
         return salary;
-    }
-
-    @Override
-    public double getOklad() {
-        return 0;
     }
 
 

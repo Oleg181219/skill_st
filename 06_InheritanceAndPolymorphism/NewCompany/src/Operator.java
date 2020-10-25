@@ -1,4 +1,4 @@
-import java.math.BigDecimal;
+
 
 public class Operator implements Employee {
 
@@ -14,10 +14,6 @@ public class Operator implements Employee {
         return monthSalary;
     }
 
-    @Override
-    public double getOklad() {
-        return monthSalary;
-    }
 
 
 }
