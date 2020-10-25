@@ -1,17 +1,22 @@
 import java.math.BigDecimal;
 
 public class Operator implements Employee {
-    private BigDecimal salary = new BigDecimal(33000);
 
+    private double monthSalary= 33000;
 
     @Override
-    public BigDecimal getMonthSalary() {
-        return salary;
+    public double getMonthSalary() {
+        return monthSalary;
     }
 
     @Override
-    public BigDecimal getOklad() {
-        return null;
+    public double setMonthSalary() {
+        return monthSalary;
+    }
+
+    @Override
+    public double getOklad() {
+        return monthSalary;
     }
 
 

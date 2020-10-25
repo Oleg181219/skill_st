@@ -2,8 +2,9 @@ import java.math.BigDecimal;
 
 interface Employee {
 
-    BigDecimal getMonthSalary();
 
-    BigDecimal getOklad();
+    double getMonthSalary();
+    double setMonthSalary();
+    double getOklad();
 
 }

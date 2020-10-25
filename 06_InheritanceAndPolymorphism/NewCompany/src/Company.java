@@ -1,15 +1,22 @@
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Company {
-    ArrayList<Employee> companyMain = new ArrayList<>();
-    BigDecimal incoming = new BigDecimal("666666");
 
-    public BigDecimal getIncoming() {
+    ArrayList<Employee> companyMain = new ArrayList<>();
+    ArrayList<Employee> managers = new ArrayList<>();
+    ArrayList<Employee> operators = new ArrayList<>();
+    ArrayList<Employee> topManagers = new ArrayList<>();
+    Employee operator = new Operator();
+    Employee topManager = new TopManager();
+    Employee manager = new Manager();
+    double incoming =0;
+
+    public double getIncoming() {
         return incoming;
     }
 
-    public void setIncoming(BigDecimal incoming) {
+
+    public void setIncoming(double incoming) {
         this.incoming = incoming;
     }
 
