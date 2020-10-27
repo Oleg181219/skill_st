@@ -35,17 +35,17 @@ public class main {
         company.hireAll(operators);
         System.out.println(company.employeeList.size());
 
-        company.getTopSalaryStaff(15);
+        company.getTopSalaryStaff(-15);
         for (int i = 0; i < company.employeeListTop.size(); i++) {
             System.out.println(i + "-max ДО- " + company.employeeListTop.get(i).getMonthSalary());
         }
-        System.out.println(company.employeeListTop.size());
+        System.out.println("колличество элементов в List = " + company.employeeListTop.size());
 
         company.getLowestSalaryStaff(30);
         for (int i = 0; i < company.employeeListLow.size(); i++) {
             System.out.println(i + "-min ДО- " + company.employeeListLow.get(i).getMonthSalary());
         }
-        System.out.println(company.employeeListLow.size());
+        System.out.println("колличество элементов в List = " + company.employeeListLow.size());
 
         company.fire(50);
 
@@ -53,13 +53,13 @@ public class main {
         for (int i = 0; i < company.employeeListTop.size(); i++) {
             System.out.println(i + "-max ПОСЛЕ- " + company.employeeListTop.get(i).getMonthSalary());
         }
-        System.out.println(company.employeeListTop.size());
+        System.out.println("колличество элементов в List = " + company.employeeListTop.size());
 
         company.getLowestSalaryStaff(30);
         for (int i = 0; i < company.employeeListLow.size(); i++) {
             System.out.println(i + "-min ПОСЛЕ- " + company.employeeListLow.get(i).getMonthSalary());
         }
-        System.out.println(company.employeeListLow.size());
+        System.out.println("колличество элементов в List = " + company.employeeListLow.size());
 
     }
 }
