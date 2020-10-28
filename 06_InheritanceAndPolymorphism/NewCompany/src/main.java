@@ -6,6 +6,8 @@ public class main {
         int numberOfManagers = 80;
         int numberOfOperator = 180;
         int numberOfTop = 10;
+        int topSalary = 15;
+        int lowSalary = 30;
         ArrayList<Employee> managers = new ArrayList<>();
         ArrayList<Employee> operators = new ArrayList<>();
         ArrayList<Employee> topManagers = new ArrayList<>();
@@ -35,31 +37,25 @@ public class main {
         company.hireAll(operators);
         System.out.println(company.employeeList.size());
 
-        company.getTopSalaryStaff(-15);
-        for (int i = 0; i < company.employeeListTop.size(); i++) {
-            System.out.println(i + "-max ДО- " + company.employeeListTop.get(i).getMonthSalary());
-        }
-        System.out.println("колличество элементов в List = " + company.employeeListTop.size());
+        System.out.println(company.getTopSalaryStaff(topSalary).size());
 
-        company.getLowestSalaryStaff(30);
-        for (int i = 0; i < company.employeeListLow.size(); i++) {
-            System.out.println(i + "-min ДО- " + company.employeeListLow.get(i).getMonthSalary());
+        System.out.println("--" + company.getTopSalaryStaff(topSalary).size());
+        for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
+            System.out.println(i + "--" + company.getTopSalaryStaff(topSalary).get(i).getMonthSalary());
         }
-        System.out.println("колличество элементов в List = " + company.employeeListLow.size());
+        System.out.println("--" + company.getLowestSalaryStaff(lowSalary).size());
+        for (int i = 0; i < company.employeeList.subList(0, lowSalary).size(); i++) {
+            System.out.println(i + "--" + company.getLowestSalaryStaff(lowSalary).get(i).getMonthSalary());
+        }
 
         company.fire(50);
 
-        company.getTopSalaryStaff(15);
-        for (int i = 0; i < company.employeeListTop.size(); i++) {
-            System.out.println(i + "-max ПОСЛЕ- " + company.employeeListTop.get(i).getMonthSalary());
+        for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
+            System.out.println(i + "--" + company.getTopSalaryStaff(topSalary).get(i).getMonthSalary());
         }
-        System.out.println("колличество элементов в List = " + company.employeeListTop.size());
-
-        company.getLowestSalaryStaff(30);
-        for (int i = 0; i < company.employeeListLow.size(); i++) {
-            System.out.println(i + "-min ПОСЛЕ- " + company.employeeListLow.get(i).getMonthSalary());
+        for (int i = 0; i < company.employeeList.subList(0, lowSalary).size(); i++) {
+            System.out.println(i + "--" + company.getLowestSalaryStaff(lowSalary).get(i).getMonthSalary());
         }
-        System.out.println("колличество элементов в List = " + company.employeeListLow.size());
 
     }
 }
