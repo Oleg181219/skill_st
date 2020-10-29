@@ -39,29 +39,33 @@ public class main {
         System.out.println(company.employeeList.size());
 
         System.out.println(company.getTopSalaryStaff(topSalary).size());
-
-
-        for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
-            System.out.println(i + "-Top =" + company.getTopSalaryStaff(topSalary).get(i).getMonthSalary());
+        if (topSalary > 0 & topSalary < company.employeeList.size()) {
+            for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
+                System.out.println(i + "-Top =" + company.getTopSalaryStaff(topSalary).get(i).getMonthSalary());
+            }
         }
-        System.out.println("--" + company.getLowestSalaryStaff(lowSalary).size());
-        for (int i = 0; i < company.employeeList.subList(0, lowSalary).size(); i++) {
-            System.out.println(i + "-Low =-" + company.getLowestSalaryStaff(lowSalary).get(i).getMonthSalary());
+        if (lowSalary > 0 & lowSalary < company.employeeList.size()) {
+            for (int i = 0; i < company.employeeList.subList(0, lowSalary).size(); i++) {
+                System.out.println(i + "-Low =-" + company.getLowestSalaryStaff(lowSalary).get(i).getMonthSalary());
+            }
         }
 
-        List<Employee> dissmissList = company.employeeList.subList(0,company.employeeList.size()/2 );
+// увольнение
+        List<Employee> dissmissList = company.employeeList.subList(0, company.employeeList.size() / 2);
         int j = dissmissList.size();
-        for (int i= 0; i< j; i++) {
+        for (int i = 0; i < j; i++) {
             company.fire(company.employeeList.get(i));
         }
-
-        System.out.println(""+ company.employeeList.size());
-        for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
-            System.out.println(i + "-Top  after =" + company.getTopSalaryStaff(topSalary).get(i).getMonthSalary());
+        if (topSalary > 0 & topSalary < company.employeeList.size()) {
+            System.out.println("" + company.employeeList.size());
+            for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
+                System.out.println(i + "-Top  after =" + company.getTopSalaryStaff(topSalary).get(i).getMonthSalary());
+            }
         }
-        for (int i = 0; i < company.employeeList.subList(0, lowSalary).size(); i++) {
-            System.out.println(i + "-Lowest after =" + company.getLowestSalaryStaff(lowSalary).get(i).getMonthSalary());
+        if (lowSalary > 0 & lowSalary < company.employeeList.size()) {
+            for (int i = 0; i < company.employeeList.subList(0, lowSalary).size(); i++) {
+                System.out.println(i + "-Lowest after =" + company.getLowestSalaryStaff(lowSalary).get(i).getMonthSalary());
+            }
         }
-
+        }
     }
-}
