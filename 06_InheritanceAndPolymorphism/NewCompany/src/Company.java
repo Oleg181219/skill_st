@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.lang.Math;
+
 
 public class Company {
 
@@ -25,30 +25,26 @@ public class Company {
         employeeList.addAll(empl);
     }
 
-    public void fire(int fire) {
-        for (int i = 0; i < fire; i++) {
-            employeeList.remove((int) (Math.random() * employeeList.size()));
-            /*  если удалить сразу пачкой с начала и до указанного числа, то строка ниже.
-                employeeList.remove(i);
-            */
-        }
-
+    public void fire(Employee employee) {
+        employeeList.remove(employee);
     }
 
     public List<Employee> getTopSalaryStaff(int count) {
-        count = Math.abs(count);
-        if (count < employeeList.size()) {
-            employeeList.sort((s1, s2) -> (int) s2.getMonthSalary() - (int) s1.getMonthSalary());
-            return employeeList.subList(0, count);
+        if (count > 0) {
+            if (count < employeeList.size()) {
+                employeeList.sort((s1, s2) -> (int) s2.getMonthSalary() - (int) s1.getMonthSalary());
+                return employeeList.subList(0, count);
+            }
         }
-        return employeeList.subList(0, 0);
+        return employeeList.subList(0, employeeList.size());
     }
 
     public List<Employee> getLowestSalaryStaff(int count) {
-        count = Math.abs(count);
-        if (count < employeeList.size()) {
-            employeeList.sort(Comparator.comparingInt(s -> (int) s.getMonthSalary()));
-            return employeeList.subList(0, count);
+        if (count > 0) {
+            if (count < employeeList.size()) {
+                employeeList.sort(Comparator.comparingInt(s -> (int) s.getMonthSalary()));
+                return employeeList.subList(0, count);
+            }
         }
         return employeeList.subList(0, 0);
     }
