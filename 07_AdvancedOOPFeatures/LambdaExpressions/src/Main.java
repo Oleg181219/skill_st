@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Stream;
+
 
 public class Main {
     private static String staffFile = "data/staff.txt";
@@ -12,24 +12,13 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<Employee> staff = loadStaffFromFile();
-// 1 метод. зп только выдает в порядке убыания :((( не нашел как исправить.
-//       staff.sort(Comparator.comparing((Employee employee) -> employee.getSalary())
-//               .thenComparing(Employee::getName));
-// 2 метод
-        staff.sort((a1, a2) -> {
-            int result = (a2.getSalary() - a1.getSalary());
-            if (result != 0) {
-                return result;
-            }
-            return (a1.getName().compareTo(a2.getName()));
-        });
 
+        staff.sort(Comparator.comparing(Employee::getSalary).thenComparing(Comparator.comparing(Employee::getName)));
 
-        for (Employee s : staff) {
-            System.out.println(s);
-        }
+        System.out.println(staff.stream().filter(s -> s.getWorkStart().getYear() == 117)
+                .max(Comparator.comparingInt(Employee::getSalary)));
+
     }
-
 
     private static ArrayList<Employee> loadStaffFromFile() {
         ArrayList<Employee> staff = new ArrayList<>();
@@ -41,8 +30,7 @@ public class Main {
                     System.out.println("Wrong line: " + line);
                     continue;
                 }
-                staff.add(new Employee(
-                        fragments[0],
+                staff.add(new Employee(fragments[0],
                         Integer.parseInt(fragments[1]),
                         (new SimpleDateFormat(dateFormat)).parse(fragments[2])
                 ));
