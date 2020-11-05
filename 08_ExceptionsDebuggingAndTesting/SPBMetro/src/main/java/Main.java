@@ -14,7 +14,6 @@ public class Main
 {
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
-
     private static StationIndex stationIndex;
 
     public static void main(String[] args)
