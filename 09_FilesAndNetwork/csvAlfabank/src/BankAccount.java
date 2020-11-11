@@ -3,10 +3,7 @@ import java.util.HashMap;
 public class BankAccount {
     private static double income;
     private static double outcome;
-    private double out;
-    private double amountSpent;
-    private static HashMap<String, Double> company = new HashMap<>();
-    private String concan;
+    private static final HashMap<String, Double> company = new HashMap<>();
 
     public static HashMap<String, Double> getCompany() {
         return company;
@@ -32,9 +29,9 @@ public class BankAccount {
     public void countAccountMove(String[] fild) {
 
         setIncome(getIncome() + Double.parseDouble(fild[6]));
-        amountSpent = Double.parseDouble(fild[7].replace('"', ' ')
+        double amountSpent = Double.parseDouble(fild[7].replace('"', ' ')
                 .replace(',', '.').trim());
-        out = getOutcome() + amountSpent;
+        double out = getOutcome() + amountSpent;
         setOutcome(out);
 
 
@@ -42,10 +39,10 @@ public class BankAccount {
 
         if (string.matches("\\\\.+") || string.matches("\\s.+") || string.matches("\\w.+")) {
             String[] companyList = string.split("\\\\");
-            concan = "";
+            String concan = "";
 
-            for (int i = 0; i < companyList.length; i++) {
-                concan = concan.concat(companyList[i]).concat(" ");
+            for (String s : companyList) {
+                concan = concan.concat(s).concat(" ");
             }
 
             if (company.containsKey(concan)) {

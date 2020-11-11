@@ -8,8 +8,6 @@ import java.util.Map;
 
 public class CsvAlfa {
     private static final Path PATH = Paths.get("resurses/movementList.csv");
-
-
     public static void main(String[] args) {
 
         BankAccount bankAccount = new BankAccount();
