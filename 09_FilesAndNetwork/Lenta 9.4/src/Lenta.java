@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Lenta {
-    private static String target = "files/";
+    private static final String target = "files/";
 
     public static void main(String[] args) {
         try {
@@ -25,6 +25,9 @@ public class Lenta {
                 String[] filds = string.split("/");
                 String nameFile = filds[filds.length - 1];
                 String finalTarget = target.concat(nameFile);
+                File newDir =  new File(target);
+                if (!newDir.exists()) newDir.mkdir();
+
                 ReadableByteChannel readableByteChannel = Channels.newChannel(website.openStream());
                 FileOutputStream fileOutputStream = new FileOutputStream(finalTarget);
                 fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
