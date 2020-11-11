@@ -2,22 +2,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Сумма расходов: 398 563.39 руб.
- * Сумма доходов: 289 890.06 руб.
- * <p>
- * Суммы расходов по организациям:
- * RUSMOSKVA56  SHLOVE REPUBLIC        1 081.53 руб.
- * RUSMOSCOW42 SHCL ETOILE                     126.34 руб.
- * RUSPUSHKINO105ZOOMAGAZIN 4             217.65 руб.
- */
 public class CsvAlfa {
     private static final Path PATH = Paths.get("resurses/movementList.csv");
 
 
     public static void main(String[] args) {
+
         BankAccount bankAccount = new BankAccount();
         try {
             List<String> list = Files.readAllLines(PATH);
@@ -29,7 +23,23 @@ public class CsvAlfa {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Сумма прихода: " + BankAccount.getIncome());
-        System.out.println("Сумма расхода: " + BankAccount.getOutcome());
+
+        System.out.println("============================================" + "\n" +
+                "Сумма доходов: " + BankAccount.getIncome() + "руб.");
+        System.out.println("Сумма расхода: " + BankAccount.getOutcome() + "руб." + "\n" +
+                "Суммы расходов по организациям:" + "\n");
+        printValues(BankAccount.getCompany());
+    }
+
+    public static void printValues(HashMap<String, Double> map) {
+
+        for (Map.Entry<String, Double> pair : map.entrySet()) {
+            String name = pair.getKey();
+            Double value = pair.getValue();
+            System.out.print(name + "= ");
+            String result = String.format("%.2f", value);
+            System.out.println(result + "руб.");
+        }
+
     }
 }

@@ -1,11 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class BankAccount {
     private static double income;
     private static double outcome;
-    private static double out;
-    //Company companyes;
+    private double out;
+    private double amountSpent;
+    private static HashMap<String, Double> company = new HashMap<>();
+    private String concan;
+
+    public static HashMap<String, Double> getCompany() {
+        return company;
+    }
 
     public static double getIncome() {
         return income;
@@ -23,27 +28,38 @@ public class BankAccount {
         BankAccount.outcome = outcome;
     }
 
-    private  ArrayList<Company> companyes = new ArrayList<>();
 
-    public  void countAccountMove(String[] fild) {
+    public void countAccountMove(String[] fild) {
 
         setIncome(getIncome() + Double.parseDouble(fild[6]));
-        out = getOutcome() + Double.parseDouble(fild[7].replace('"', ' ')
+        amountSpent = Double.parseDouble(fild[7].replace('"', ' ')
                 .replace(',', '.').trim());
+        out = getOutcome() + amountSpent;
         setOutcome(out);
-       /* String string = fild[5].substring(28, 60);
+
+
+        String string = fild[5].substring(28, 60).trim();
+
         if (string.matches("\\\\.+") || string.matches("\\s.+") || string.matches("\\w.+")) {
-            String[] company = string.split("\\\\");
+            String[] companyList = string.split("\\\\");
+            concan = "";
 
-            if(companyes.getNameCompany().contains(company[company.length - 1].trim())){
-
-
-
+            for (int i = 0; i < companyList.length; i++) {
+                concan = concan.concat(companyList[i]).concat(" ");
             }
-        }*/
 
+            if (company.containsKey(concan)) {
+                company.put(concan, company.get(concan) + amountSpent);
 
+            } else if (!company.containsKey(concan)) {
+                company.put(concan, amountSpent);
+            }
+
+        }
     }
 
 
 }
+
+
+
