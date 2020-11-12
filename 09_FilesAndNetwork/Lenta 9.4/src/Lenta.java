@@ -4,14 +4,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.Objects;
+
 
 public class Lenta {
     private static final String target = "files/";
@@ -39,6 +39,11 @@ public class Lenta {
                     fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
                 }
             }
+            File directory = new File(target);
+            Arrays.stream(Objects.requireNonNull(directory.listFiles()))
+                    .map(File::getName)
+                    .forEach(System.out::println);
+
         } catch (Exception e) {
             e.printStackTrace();
             rootLogger.error(e.getMessage() + "\n");
