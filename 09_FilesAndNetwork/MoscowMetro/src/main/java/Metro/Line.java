@@ -3,7 +3,7 @@ package Metro;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Line {
+public class Line implements Comparable<Line>{
     private String number;
     private String name;
    // private List<Station> stations;
@@ -30,5 +30,9 @@ public class Line {
        // stations = new ArrayList<>();
     }
 
+    @Override
+    public int compareTo(Line line) {
+        return number.compareTo(line.getNumber());
+    }
 
 }
