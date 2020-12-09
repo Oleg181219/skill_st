@@ -2,19 +2,22 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class Main
+public class ImageResizer implements Runnable
 {
-    public static void main(String[] args)
-    {
-        String srcFolder = "/users/sortedmap/Desktop/src";
-        String dstFolder = "/users/sortedmap/Desktop/dst";
+    private File[] files;
+    private int newWidth;
+    private String dstFolder;
+    long start;
 
-        File srcDir = new File(srcFolder);
+    public ImageResizer(File[] files, int newWidth, String dstFolder, long start) {
+        this.files = files;
+        this.newWidth = newWidth;
+        this.dstFolder = dstFolder;
+        this.start = start;
+    }
 
-        long start = System.currentTimeMillis();
-
-        File[] files = srcDir.listFiles();
-
+    @Override
+    public void run() {
         try
         {
             for(File file : files)
@@ -50,7 +53,7 @@ public class Main
         catch (Exception ex) {
             ex.printStackTrace();
         }
-
         System.out.println("Duration: " + (System.currentTimeMillis() - start));
     }
+
 }
