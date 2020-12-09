@@ -1,7 +1,8 @@
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table (name = "Teachers")
+@Table(name = "Teachers")
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,11 @@ public class Teacher {
 
     private int age;
 
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courses;
+
+    @OneToMany
     public int getId() {
         return id;
     }
@@ -44,4 +50,9 @@ public class Teacher {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
 }

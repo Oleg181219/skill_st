@@ -1,13 +1,13 @@
-import java.sql.*;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
 
 public class Main {
     private static final String url = "jdbc:mysql://localhost:3306/skillbox";
@@ -17,39 +17,34 @@ public class Main {
     private static int num = 10;
 
     public static void main(String[] args) {
-
+        SessionFactory sessionFactory = HibernateActivation.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Course course = session.get(Course.class, 1);
         //10.1
         averageSell();
 
+
         //10.2
-        try {
-            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-            Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
-            SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
-
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            course = session.get(Course.class, num);
-
-
-            System.out.println("Название курса: " + course.getName() +
-                    "\nКоличество студентов: " + course.getStudentsCount());
-            System.out.println(course.getTeacher().getName() + ", с зп:" + course.getTeacher().getSalary() + " руб.");
-            List<Student> studentList = course.getStudents();
-
-            for (Student stud : studentList) {
-                System.out.println(stud.getName());
-            }
-
-
-            transaction.commit();
-            sessionFactory.close();
-        }catch (Exception e){
-            e.printStackTrace();
+        String sql = "select * from Courses";
+        Query query = session.createSQLQuery(sql).addEntity(Course.class);
+        List<Course> courses = query.list();
+        for (Course oneCourse : courses) {
+            System.out.println(oneCourse.getName() + " (количество студентов - " + oneCourse.getStudentsCount() + ")");
         }
 
-    }
+        sql = "select * from Purchaselist";
+        query = session.createSQLQuery(sql).addEntity(PurchaseList.class);
+        List<PurchaseList> purchaseLists = query.list();
 
+
+        Transaction transaction = session.beginTransaction();
+        for (PurchaseList purchaseList : purchaseLists) {
+            session.save(new LinkedPurchaseList(purchaseList.getStudent(), purchaseList.getCourse()));
+        }
+
+        transaction.commit();
+        sessionFactory.close();
+    }
 
     private static void averageSell() {
         try {

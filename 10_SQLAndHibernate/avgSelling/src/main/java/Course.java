@@ -1,12 +1,14 @@
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Courses")
-public class Course {
+public class Course implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -21,19 +23,33 @@ public class Course {
     @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
 
-    @Column(name = "students_count")
-    private int studentsCount;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Subscriptions",
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")})
+    private List<Student> students;
+
+    @Column(name = "students_count", nullable = true)
+    private Integer studentsCount;
 
     private int price;
 
     @Column(name = "price_per_hour")
     private float pricePerHour;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Subscriptions",
-            joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns ={@JoinColumn(name = "student_id")})
-    private List<Student> students;
+    @OneToMany(mappedBy = "course")
+    Set<Subscription> subscriptions;
+
+    @OneToMany(mappedBy = "course")
+    List<PurchaseList> purchaseLists;
+
+    public List<PurchaseList> getPurchaseLists() {
+        return purchaseLists;
+    }
+
+    public void setPurchaseLists(List<PurchaseList> purchaseLists) {
+        this.purchaseLists = purchaseLists;
+    }
 
     public int getId() {
         return id;
@@ -83,7 +99,7 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public int getStudentsCount() {
+    public Integer getStudentsCount() {
         return studentsCount;
     }
 
@@ -113,5 +129,32 @@ public class Course {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public void setStudentsCount(Integer studentsCount) {
+        this.studentsCount = studentsCount;
+    }
+
+    public Set<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Set<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", duration=" + duration +
+                ", type=" + type +
+                ", description='" + description + '\'' +
+                ", teacher=" + teacher +
+                ", studentsCount=" + studentsCount +
+                ", price=" + price +
+                ", pricePerHour=" + pricePerHour +
+                '}';
     }
 }

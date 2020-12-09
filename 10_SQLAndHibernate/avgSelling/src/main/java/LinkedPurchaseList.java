@@ -1,41 +1,24 @@
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PurchaseList")
-public class PurchaseList implements Serializable{
+@Table(name = "LinkedPurchaseList")
+public class LinkedPurchaseList implements Serializable {
 
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="student_name", referencedColumnName="name")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="course_name", referencedColumnName="name", nullable = false)
+    @JoinColumn(name = "course_id")
     private Course course;
 
-    @Column(name = "subscription_date")
-    private Date subscriptionDate;
-
-    private int price;
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Date getSubscriptionDate() {
-        return subscriptionDate;
-    }
-
-    public void setSubscriptionDate(Date subscriptionDate) {
-        this.subscriptionDate = subscriptionDate;
+    public LinkedPurchaseList(Student student, Course course) {
+        this.student = student;
+        this.course = course;
     }
 
     public Student getStudent() {
@@ -57,8 +40,8 @@ public class PurchaseList implements Serializable{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PurchaseList)) return false;
-        PurchaseList that = (PurchaseList) o;
+        if (!(o instanceof LinkedPurchaseList)) return false;
+        LinkedPurchaseList that = (LinkedPurchaseList) o;
         return getStudent().equals(that.getStudent()) &&
                 getCourse().equals(that.getCourse());
     }
@@ -67,5 +50,4 @@ public class PurchaseList implements Serializable{
     public int hashCode() {
         return Objects.hash(getStudent(), getCourse());
     }
-
 }
