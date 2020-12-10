@@ -1,34 +1,39 @@
-import org.imgscalr.Scalr;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ImagingOpException;
 import java.io.File;
 
 
 public class Main {
-    private static int newWidth = 300;
+    private static int newWidth = 1024;
+
 
     public static void main(String[] args) {
+
         int i = Runtime.getRuntime().availableProcessors();
         String srcFolder = "/Users/olegprokhorov/Pictures/scr";
         String dstFolder = "/Users/olegprokhorov/Pictures/dst";
         long start = System.currentTimeMillis();
         File srcDir = new File(srcFolder);
         File[] files = srcDir.listFiles();
+
         int mid = files.length / i;
         int startPos = 0;
-//        BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws Exception {
-//            return Scalr.resize(originalImage, Scalr.Method.AUTOMATIC, Scalr.Mode.AUTOMATIC,
-//                    targetWidth, targetHeight, Scalr.OP_ANTIALIAS);
-//        }
+
         try {
-            for (int j = 0; j < mid; j++) {
-                File[] nameMass = new File[mid];
-                System.arraycopy(files, startPos, nameMass, 0, nameMass.length);
-                ImageResizer resizer = new ImageResizer(nameMass, newWidth, dstFolder, start);
-                new Thread(resizer).start();
+            for (int j = 0; j < mid - 2; j++) {
+                if ((mid * j + mid) < files.length) {
+                    File[] nameMass = new File[mid];
+                    int count = nameMass.length;
+                    System.arraycopy(files, startPos, nameMass, 0, count);
+                    BufferedImageResizer bufferedImageResizer = new BufferedImageResizer(nameMass, newWidth, dstFolder, start);
+                    new Thread(bufferedImageResizer).start();
+                }
+                if (((mid * j + mid) > files.length) & (mid * j < files.length)) {
+                    int count = files.length - (j * mid);
+                    File[] nameMass = new File[count];
+                    System.arraycopy(files, startPos, nameMass, 0, count );
+                    BufferedImageResizer bufferedImageResizer = new BufferedImageResizer(nameMass, newWidth, dstFolder, start);
+                    new Thread(bufferedImageResizer).start();
+                }
                 startPos += mid;
             }
         } catch (Exception e) {
@@ -38,5 +43,8 @@ public class Main {
         System.out.println(files.length);
 
     }
-
+    // перая часть задания.
+//                ImageResizer resizer = new ImageResizer(nameMass, newWidth, dstFolder, start);
+//                new Thread(resizer).start();
+    // со зездочкой
 }
