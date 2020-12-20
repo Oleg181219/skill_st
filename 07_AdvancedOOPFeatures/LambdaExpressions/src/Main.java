@@ -1,7 +1,5 @@
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -14,9 +12,8 @@ public class Main {
         ArrayList<Employee> staff = loadStaffFromFile();
 
         staff.sort(Comparator.comparing(Employee::getSalary).thenComparing(Comparator.comparing(Employee::getName)));
-
-        System.out.println(staff.stream().filter(s -> s.getWorkStart().getYear() == 117)
-                .max(Comparator.comparingInt(Employee::getSalary)));
+        staff.stream().filter(s -> s.getWorkStart().getYear() == 117)
+                .max(Comparator.comparingInt(Employee::getSalary)).ifPresent(System.out::println);
 
     }
 

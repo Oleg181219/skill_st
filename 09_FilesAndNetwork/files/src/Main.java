@@ -16,6 +16,7 @@ public class Main {
                 String incomingPath = ((new BufferedReader(new InputStreamReader(System.in))).readLine()).trim();
 
                 Path folder = Paths.get(incomingPath);
+                System.out.println(folder.);
                 double size = Files.walk(folder)
                         .filter(p -> p.toFile().isFile())
                         .mapToLong(p -> p.toFile().length())
@@ -37,7 +38,6 @@ public class Main {
                 System.out.println("кол-во символов "+length);
             } catch (Exception e) {
                 System.out.println(e.fillInStackTrace());
-
             }
 
             }

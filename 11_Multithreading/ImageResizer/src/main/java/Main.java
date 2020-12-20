@@ -3,7 +3,7 @@ import java.io.File;
 
 
 public class Main {
-    private static int newWidth = 1024;
+    private static final int newWidth = 1024;
 
 
     public static void main(String[] args) {
@@ -15,6 +15,7 @@ public class Main {
         File srcDir = new File(srcFolder);
         File[] files = srcDir.listFiles();
 
+        assert files != null;
         int mid = files.length / i;
         int startPos = 0;
 

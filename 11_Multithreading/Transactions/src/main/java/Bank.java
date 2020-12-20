@@ -17,12 +17,16 @@ public class Bank implements Runnable {
     private int recBalanceCount = 0;
     private int transferCount = 0;
     private long bankBallanceStart = 0;
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
 
     public void setNumIteration(long numIteration) {
         this.numIteration = numIteration;
     }
 
     private long numIteration = 0;
+
     public int getBalanceRequestsCount() {
         return balanceRequestsCount.get();
     }
@@ -94,21 +98,22 @@ public class Bank implements Runnable {
         transferCount++;
 
         if (fraudList.contains(fromAccountNum)) {
-            System.out.println("Счет отправителя заблокирован! Транзакция не проведена!");
+            System.out.println(ANSI_RED + "Счет отправителя заблокирован! Транзакция не проведена!" + ANSI_RESET);
             lenth++;
             return;
         }
         if (fraudList.contains(toAccountNum)) {
-            System.out.println("Счет получателя заблокирован! Транзакция не проведена!");
+            System.out.println(ANSI_RED + "Счет получателя заблокирован! Транзакция не проведена!" + ANSI_RESET);
             lenth++;
             return;
         }
 
         synchronized (Account.class) {
             if (accounts.get(fromAccountNum).getMoney() < amount) {
-                System.out.println("счет: " + accounts.get(fromAccountNum).getMoney() + " Размер перевода: " + amount);
-                System.out.println("Недостаточно средств на счете №:" + accounts.get(fromAccountNum).getAccNumber()
-                        + " ");
+                System.out.println(ANSI_PURPLE + "счет: " + ANSI_RESET + accounts.get(fromAccountNum).getMoney()
+                        + ANSI_PURPLE + " Размер перевода: " + ANSI_RESET + amount);
+                System.out.println(ANSI_RED + "Недостаточно средств на счете №:" + ANSI_RESET + accounts.get(fromAccountNum).getAccNumber()
+                        + ANSI_RED + " moneyAmmount: " + ANSI_RESET + accounts.get(fromAccountNum).getMoney());
                 lenth++;
                 return;
             }
@@ -142,7 +147,7 @@ public class Bank implements Runnable {
 
     @Override
     public void run() {
-        for(int j = 0; j < numIteration; j++) {
+        for (int j = 0; j < numIteration; j++) {
             String fromAccount = String.valueOf((int) (Math.random() * numberAccounts));
             String toAccount = String.valueOf((int) (Math.random() * numberAccounts));
             long transferSum = (long) (Math.random() * 52500);

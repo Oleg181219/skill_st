@@ -56,6 +56,7 @@ public class main {
         for (int i = 0; i < j; i++) {
             company.fire(company.employeeList.get(i));
         }
+ //
         if (topSalary > 0 & topSalary < company.employeeList.size()) {
             System.out.println("" + company.employeeList.size());
             for (int i = 0; i < company.employeeList.subList(0, topSalary).size(); i++) {
