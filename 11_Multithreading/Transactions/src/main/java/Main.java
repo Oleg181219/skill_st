@@ -8,7 +8,7 @@ public class Main {
         bank.setMaxSumOnAccount(999999);
         bank.addAccounts();
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 1000000; i++) {
             new Thread(bank).start();
         }
 
