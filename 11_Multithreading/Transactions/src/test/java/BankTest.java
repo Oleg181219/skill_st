@@ -1,5 +1,6 @@
 import junit.framework.TestCase;
 import java.util.HashMap;
+import java.util.concurrent.CyclicBarrier;
 
 
 public class BankTest extends TestCase {
@@ -27,8 +28,8 @@ public class BankTest extends TestCase {
                 new Thread(this :: getBalanceTest).start();
             }
         }
-
-
+        int numCore = Runtime.getRuntime().availableProcessors();
+        new CyclicBarrier(numCore);
         System.out.println("Время выполнения: " + (System.currentTimeMillis() - startTime));
         System.out.println("Количество счетов в банке: " + accounts.keySet().size());
         System.out.println("Количество заблокированных счетов: "+ Bank.getFraudList().size());

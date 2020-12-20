@@ -1,3 +1,5 @@
+import java.util.concurrent.CyclicBarrier;
+
 public class Main {
 
     Bank bank = new Bank();
@@ -8,10 +10,18 @@ public class Main {
         bank.setMaxSumOnAccount(999999);
         bank.addAccounts();
 
-        for (int i = 0; i < 1000000; i++) {
+        int numCore = Runtime.getRuntime().availableProcessors();
+        bank.setNumIteration(10000/numCore);
+        for (int i = 0; i < numCore; i++) {
             new Thread(bank).start();
         }
+        try {
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        new CyclicBarrier(numCore);
         System.out.println("счетчик переводов: " + bank.getTransferCount());
         System.out.println("баланс банка стартовый: " + bank.getBankBallanceStart());
         System.out.println("количество заблокированных аккаунтов: " + Bank.getFraudList().size()

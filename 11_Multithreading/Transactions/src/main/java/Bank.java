@@ -18,6 +18,11 @@ public class Bank implements Runnable {
     private int transferCount = 0;
     private long bankBallanceStart = 0;
 
+    public void setNumIteration(long numIteration) {
+        this.numIteration = numIteration;
+    }
+
+    private long numIteration = 0;
     public int getBalanceRequestsCount() {
         return balanceRequestsCount.get();
     }
@@ -118,23 +123,15 @@ public class Bank implements Runnable {
                 fraudList.add(toAccountNum);
             }
         }
-        for (int j = 0; j < (int) (Math.random() * 5 + 5); j++) {
-            getBalance(String.valueOf((int) (Math.random() * numberAccounts)));
-            recBalanceCount++;
-
-        }
-
     }
 
     public synchronized boolean isFraud(String fromAccountNum, String toAccountNum) {
         try {
-            wait(1000);
+            wait(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         fraudTestCounter++;
-//        Boolean ran = ;
-//        System.out.println("" + ran);
         return random.nextBoolean();
     }
 
@@ -145,15 +142,21 @@ public class Bank implements Runnable {
 
     @Override
     public void run() {
-        String fromAccount = String.valueOf((int) (Math.random() * numberAccounts));
-        String toAccount = String.valueOf((int) (Math.random() * numberAccounts));
-        long transferSum = (long) (Math.random() * 52500);
-        try {
-            transfer(fromAccount, toAccount, transferSum);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        for(int j = 0; j < numIteration; j++) {
+            String fromAccount = String.valueOf((int) (Math.random() * numberAccounts));
+            String toAccount = String.valueOf((int) (Math.random() * numberAccounts));
+            long transferSum = (long) (Math.random() * 52500);
+            try {
+                transfer(fromAccount, toAccount, transferSum);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            for (int k = 0; k < (int) (Math.random() * 5 + 5); k++) {
+                getBalance(String.valueOf((int) (Math.random() * numberAccounts)));
+                recBalanceCount++;
 
+            }
+        }
     }
 
 }
