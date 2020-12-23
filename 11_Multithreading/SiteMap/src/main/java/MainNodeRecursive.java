@@ -16,7 +16,6 @@ public class MainNodeRecursive extends RecursiveAction {
         this.node = node;
     }
 
-
     @Override
     protected void compute() {
         try {

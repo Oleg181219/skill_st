@@ -12,7 +12,6 @@ public class MainNode {
         parent = null;
         childrens = new CopyOnWriteArrayList<>();
     }
-
     private int calcDepth() {
         int result = 0;
         if (parent == null) {

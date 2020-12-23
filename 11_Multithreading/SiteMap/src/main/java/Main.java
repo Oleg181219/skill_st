@@ -19,7 +19,6 @@ public class Main {
             e.printStackTrace();
         }
     }
-
     public static String createSitemapString(MainNode node, int depth) {
         String tabs = String.join("", Collections.nCopies(depth, "\t"));
         StringBuilder result = new StringBuilder(tabs + node.getUrl());
