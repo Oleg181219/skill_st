@@ -1,6 +1,6 @@
 package main;
 
-import response.ToDo;
+import main.model.ToDo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
