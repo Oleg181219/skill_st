@@ -1,65 +1,79 @@
 package main;
 
+import main.model.ToDoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import main.model.ToDo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ToDoController {
+
+    @Autowired
+    private ToDoRepository toDoRepository;
+
     /**
-     *
-     * @return весь список
+     * @return получает весь список
      */
     @GetMapping("/todo")
     public List<ToDo> list() {
-        return StorageToDo.getAllToDo();
+       Iterable<ToDo> toDoIterable = toDoRepository.findAll();
+       ArrayList<ToDo>  toDoArrayList = new ArrayList<>();
+       for (ToDo toDo: toDoIterable){
+           toDoArrayList.add(toDo) ;
+       }
+        return toDoArrayList;
     }
+
     /**
-     *
      * @return вносит 1 дело
      */
     @PostMapping("/todo")
     public int add(ToDo toDo) {
-        return StorageToDo.addToDo(toDo);
+        ToDo newToDo = toDoRepository.save(toDo);
+        return newToDo.getId();
     }
+
     /**
-     *
-     * @return дело по id
+     * @return получает дело по id
      */
     @GetMapping("/todo/{id}")
     public ResponseEntity get(@PathVariable int id) {
-        ToDo toDo = StorageToDo.getToDo(id);
-        if (toDo == null) {
+        Optional<ToDo> optionalToDo=toDoRepository.findById(id);
+        if (!optionalToDo.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return new ResponseEntity(toDo, HttpStatus.OK);
+        return new ResponseEntity(optionalToDo.get(), HttpStatus.OK);
     }
+
     /**
-     *
      * удаление 1 по id
      */
     @DeleteMapping("/todo/{id}")
     public ResponseEntity deleteTodoById(@PathVariable int id) {
-        ToDo toDo = StorageToDo.getToDo(id);
-        if (toDo == null) {
+        Optional<ToDo> optionalToDo=toDoRepository.findById(id);
+
+        if (!optionalToDo.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        StorageToDo.deleteToDo(id);
+        toDoRepository.delete(optionalToDo.get());
         return new ResponseEntity(HttpStatus.OK);
     }
+
     /**
-     *
      * очистить весь список
      */
     @DeleteMapping("/todo")
     public ResponseEntity deleteAllToDo(){
-        if(StorageToDo.getToDoList().isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-        StorageToDo.deleteAllToDo();
+        toDoRepository.deleteAll();
+//        if(StorageToDo.getToDoList().isEmpty()){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//        }
         return new ResponseEntity(HttpStatus.OK);
     }
 
