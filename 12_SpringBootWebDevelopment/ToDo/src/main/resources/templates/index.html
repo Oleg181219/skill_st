@@ -5,7 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h1>ToDoList (<span th:text="${todoCount}">0</span>)</h1>
+<h1>Список дел</h1>
+<h2>Всего дел запланировано (<span th:text="${todoCount}">0</span>)</h2>
 <div th:each="toDo : ${toDoArrayList}">
     <a href="#" class="toDo-link" th:attr="data-id=${toDo.id}" th:text="${toDo.name}"></a>
 </div>

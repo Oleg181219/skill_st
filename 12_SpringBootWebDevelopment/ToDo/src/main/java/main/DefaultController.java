@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DefaultController {
 
     @Autowired
-    ToDoRepository toDoRepository;
+    private ToDoRepository toDoRepository;
 
     @RequestMapping("/")
     public String index(Model model) {
