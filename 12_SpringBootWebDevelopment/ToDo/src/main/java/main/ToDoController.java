@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import main.model.ToDo;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,10 +72,6 @@ public class ToDoController {
     @DeleteMapping("/todo")
     public ResponseEntity deleteAllToDo(){
         toDoRepository.deleteAll();
-//        if(StorageToDo.getToDoList().isEmpty()){
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
         return new ResponseEntity(HttpStatus.OK);
     }
-
 }
