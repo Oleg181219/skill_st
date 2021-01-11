@@ -37,17 +37,19 @@ public class Main {
         scanner.close();
 
         List<Document> list = collection.find().sort(descending("Age")).into(new ArrayList<>());
-//        list.forEach(System.out::println);
+        list.forEach(System.out :: println);
 
         for (int i = 0; i < list.size(); i++) {
-           if (((Integer.parseInt(list.get(i).get("Age").toString()))) > 40){
-               count += 1;
-           };
+            if (((Integer.parseInt(list.get(i).get("Age").toString()))) > 40) {
+                count += 1;
+            }
+            ;
         }
         System.out.println(ANSI_CYAN + "Колличество студентов = " + collection.countDocuments() + ANSI_RESET);
         System.out.println(ANSI_PURPLE + "Колличество студентов старше 40 = " + count + ANSI_RESET);
         System.out.println(ANSI_YELLOW + "Курсы самого старого студента: " + list.get(0).get("Courses") + ANSI_RESET);
         System.out.println(ANSI_BLUE + "Имя самого молодого студента : " + list.get(list.size() - 1).get("Name") + ANSI_RESET);
+        AltMetod.alternate();
     }
 
 
