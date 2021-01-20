@@ -31,7 +31,6 @@ public class MainStore {
     Block<Document> printBlock = document -> System.out.println(document.toJson());
 
 
-
     public void chooseCommand(String incomingCommandName) {
         String nameProduct = "";
 /**
@@ -113,10 +112,10 @@ public class MainStore {
         AggregateIterable<Document> result = shopCollection
                 .aggregate(Arrays.asList(lookup("Product", "product", "name", "lookarray"),
                         unwind("$lookarray"),
-                        group("$name", sum("count", 1L),
-                                avg("avg", "$lookarray.productPrice"),
-                                max("max", "$lookarray.productPrice"),
-                                min("min", "$lookarray.productPrice"))));
+                        group("$name", sum("количество товара в магазине - ", 1L),
+                                avg("среднее значение - ", "$lookarray.productPrice"),
+                                max("максимальное значение - ", "$lookarray.productPrice"),
+                                min("минимальное значение - ", "$lookarray.productPrice"))));
 
         for (Document document : result) {
             System.out.println(document);
@@ -125,10 +124,10 @@ public class MainStore {
                 .aggregate(Arrays.asList(lookup("Product", "product", "name", "lookarray"),
                         unwind("$lookarray"),
                         match(lt("lookarray.productPrice", 100L)),
-                        group("$name", sum("count", 1L))));
+                        group("$name", sum("количество товара - ", 1L))));
 
         for (Document document : result2) {
-            System.out.println(document);
+            System.out.println("Товаров в магазине со стоимостью меньше 100 уе: " + document);
         }
     }
 }
