@@ -6,14 +6,13 @@ import org.bson.Document;
 
 import java.util.Arrays;
 
-import static com.mongodb.client.model.Aggregates.group;
-import static com.mongodb.client.model.Aggregates.lookup;
-import static com.mongodb.client.model.Aggregates.unwind;
 import static com.mongodb.client.model.Accumulators.avg;
 import static com.mongodb.client.model.Accumulators.max;
 import static com.mongodb.client.model.Accumulators.min;
 import static com.mongodb.client.model.Accumulators.sum;
+import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.lt;
 import static com.mongodb.client.model.Updates.*;
 
 import java.util.*;
@@ -27,7 +26,6 @@ public class MainStore {
 
     MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
     MongoDatabase commercialNetwork = mongoClient.getDatabase("Shop");
-    //    MongoDatabase product = mongoClient.getDatabase("Product");
     MongoCollection<Document> shopCollection = commercialNetwork.getCollection("Shop");
     MongoCollection<Document> productCollection = commercialNetwork.getCollection("Product");
     Block<Document> printBlock = document -> System.out.println(document.toJson());
@@ -123,7 +121,14 @@ public class MainStore {
         for (Document document : result) {
             System.out.println(document);
         }
+        AggregateIterable<Document> result2 = shopCollection
+                .aggregate(Arrays.asList(lookup("Product", "product", "name", "lookarray"),
+                        unwind("$lookarray"),
+                        match(lt("lookarray.productPrice", 100L)),
+                        group("$name", sum("count", 1L))));
 
-
+        for (Document document : result2) {
+            System.out.println(document);
+        }
     }
 }
