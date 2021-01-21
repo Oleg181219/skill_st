@@ -1,45 +1,57 @@
-import java.io.FileOutputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class Loader
-{
-    public static void main(String[] args) throws Exception
-    {
-        long start = System.currentTimeMillis();
+/**
+ * Реализуйте вывод номеров одновременно в несколько файлов из нескольких потоков.
+ * Оптимизируйте метод padNumber().
+ */
 
-        FileOutputStream writer = new FileOutputStream("res/numbers.txt");
+public class Loader {
+    private static final int REGION_AMOUNT = 100;
+    private static final int THREAD_AMOUNT = 7;
 
-        char letters[] = {'У', 'К', 'Е', 'Н', 'Х', 'В', 'А', 'Р', 'О', 'С', 'М', 'Т'};
-        for(int number = 1; number < 1000; number++)
-        {
-            int regionCode = 199;
-            for (char firstLetter : letters)
-            {
-                for (char secondLetter : letters)
-                {
-                    for (char thirdLetter : letters)
-                    {
-                        String carNumber = firstLetter + padNumber(number, 3) +
-                            secondLetter + thirdLetter + padNumber(regionCode, 2);
-                        writer.write(carNumber.getBytes());
-                        writer.write('\n');
-                    }
-                }
+    public static void main(String[] args) throws Exception {
+        if (THREAD_AMOUNT > 0 && REGION_AMOUNT > 0) {
+            long startTime = System.currentTimeMillis();
+            char[] letters = {'У', 'К', 'Е', 'Н', 'Х', 'В', 'А', 'Р', 'О', 'С', 'М', 'Т'};
+            int endRegionCode = 0;
+            int startRegionCode = 1;
+            int count = REGION_AMOUNT - REGION_AMOUNT % THREAD_AMOUNT;
+
+            ExecutorService executorService = Executors.newFixedThreadPool(THREAD_AMOUNT);
+
+            for (int i = 0; i < THREAD_AMOUNT; i++) {
+                endRegionCode = count -
+                        ((count - endRegionCode) - count / THREAD_AMOUNT);
+
+                executorService.submit(new FileWriter(startRegionCode, endRegionCode, letters, i, startTime));
+
+                System.out.println(new StringBuilder("Thread№-(")
+                        .append(i)
+                        .append(") started. Regions from - ")
+                        .append(startRegionCode)
+                        .append(" to - ")
+                        .append(endRegionCode)
+                        .toString());
+
+                startRegionCode = endRegionCode;
             }
+
+            if (count != REGION_AMOUNT) {
+                executorService.submit(new FileWriter(count, REGION_AMOUNT, letters, THREAD_AMOUNT, startTime));
+
+                System.out.println(new StringBuilder("Thread№-(")
+                        .append(THREAD_AMOUNT)
+                        .append(") started. Regions from - ")
+                        .append(count)
+                        .append(" to - ")
+                        .append(REGION_AMOUNT)
+                        .toString());
+            }
+            executorService.shutdown();
+        } else {
+            System.out.println("Некорректное количество потоков или количество регионов");
         }
 
-        writer.flush();
-        writer.close();
-
-        System.out.println((System.currentTimeMillis() - start) + " ms");
-    }
-
-    private static String padNumber(int number, int numberLength)
-    {
-        String numberStr = Integer.toString(number);
-        int padSize = numberLength - numberStr.length();
-        for(int i = 0; i < padSize; i++) {
-            numberStr = '0' + numberStr;
-        }
-        return numberStr;
     }
 }
