@@ -1,4 +1,3 @@
-
 import java.sql.*;
 
 
@@ -11,8 +10,7 @@ public class DBConnection {
     private static int i = 0;
     private static StringBuilder insertQuery = new StringBuilder();
     private static long time;
-
-
+    private static int j = 0;
 
 
     public static long getInsertQueryLenth() {
@@ -21,7 +19,6 @@ public class DBConnection {
 
     public static String getInsertQuery() {
         String insertString = insertQuery.toString();
-        insertQuery = new StringBuilder();
         return insertString;
     }
 
@@ -42,25 +39,39 @@ public class DBConnection {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
         return connection;
     }
 
-    public static void executeMultiInsert() throws Exception{
+    public static void executeMultiInsert(String string) throws Exception {
 
         String sql = "INSERT INTO voter_count(name, birthDay, num_station, time) "
-                + "VALUES" + insertQuery.toString();
-
-        DBConnection.getConnection().createStatement().execute(sql);
-
+                + "VALUES" + string;
+//        try {
+//            j = j + 1;
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("notes" + j + ".txt", false));
+//            writer.write(sql);
+//            writer.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        /**
+         * поставил условие что бы откинуть запросы с отсутствующими VALUES
+         */
+        if (sql.length() > 70) {
+            DBConnection.getConnection().createStatement().execute(sql);
+            insertQuery = new StringBuilder();
+        }
 
 
     }
 
-    public static void countVoter(String name, String birthDay, String num_station, String time) throws Exception {
+    public static void countVoter(String name, String birthDay, String numStation, String time) throws Exception {
         birthDay = birthDay.replace('.', '-');
         insertQuery.append((insertQuery.length() == 0 ? "" : ",")
-                + "('" + name + "', '" + birthDay + "', '" + num_station + "', '" + time + "')");
+                + "('" + name + "', '" + birthDay + "', '" + numStation + "', '" + time + "')");
 
     }
 

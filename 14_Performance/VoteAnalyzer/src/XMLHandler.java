@@ -1,11 +1,7 @@
 import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.ForkJoinPool;
 
 public class XMLHandler extends DefaultHandler {
@@ -19,6 +15,8 @@ public class XMLHandler extends DefaultHandler {
     String birthDay = "";
     String station = "";
     String time = "";
+    Boolean endVoter = false;
+    Boolean endVisit = false;
 
 
     @Override
@@ -27,10 +25,12 @@ public class XMLHandler extends DefaultHandler {
             if (qName.equals("voter")) {
                 name = attributes.getValue("name");
                 birthDay = attributes.getValue("birthDay");
+                endVoter = true;
             }
             if (qName.equals("visit")) {
                 station = attributes.getValue("station");
                 time = attributes.getValue("time");
+                endVisit = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,34 +39,34 @@ public class XMLHandler extends DefaultHandler {
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (!name.isEmpty() && !birthDay.isEmpty() && !station.isEmpty() && !time.isEmpty()) {
+    public void endElement(String uri, String localName, String qName) {
+        if (endVisit && endVoter) {
             try {
                 DBConnection.countVoter(name, birthDay, station, time);
+                endVoter = false;
+                endVisit = false;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            name = "";
-            birthDay = "";
-            station = "";
-            time = "";
-        }
-//        1048576
-        if (DBConnection.getInsertQueryLenth() > 1048576) {
-            while ((task != null) && !task.isDone()) {
+
+            if (DBConnection.getInsertQueryLenth() > 1048576) {
+                while ((task != null) && !task.isDone()) {
+                }
+                try {
+                    task = new ForkTask(DBConnection.getInsertQuery());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                forkJoinPool.execute(task);
             }
-            task = new ForkTask(DBConnection.getInsertQuery());
-            forkJoinPool.execute(task);
         }
-
-
     }
 
 
     @Override
     public void endDocument() throws SAXException {
         try {
-            DBConnection.executeMultiInsert();
+            DBConnection.executeMultiInsert(DBConnection.getInsertQuery());
         } catch (Exception e) {
             e.printStackTrace();
         }

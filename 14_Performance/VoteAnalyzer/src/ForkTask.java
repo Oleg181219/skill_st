@@ -1,5 +1,5 @@
 import java.util.concurrent.RecursiveAction;
-import java.util.concurrent.RecursiveTask;
+
 
 public class ForkTask extends RecursiveAction {
 
@@ -12,7 +12,7 @@ public class ForkTask extends RecursiveAction {
     @Override
     protected void compute() {
         try {
-            DBConnection.executeMultiInsert();
+            DBConnection.executeMultiInsert(insert);
         } catch (Exception e) {
             e.printStackTrace();
         }

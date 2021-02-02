@@ -31,6 +31,7 @@ public class Loader {
 
     public static void main(String[] args) throws Exception {
         /**
+         * 12233891
          * выбор файла для парсинга
          */
 //        String fileName = "res/data-0.2M.xml";
@@ -56,18 +57,10 @@ public class Loader {
          * запуск SAX-парсинга
          */
         saxParser.parse(new File(fileName), handler);
-
+        DBConnection.executeMultiInsert(DBConnection.getInsertQuery());
         System.out.println("time  = " + (System.currentTimeMillis() - time));
 
-//        try {
-//
-//            BufferedWriter writer = new BufferedWriter(new FileWriter("notes3.txt"));
-//            writer.write(insertQuery.toString());
-//            writer.append('\n');
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
 
 
     }
