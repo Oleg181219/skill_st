@@ -1,6 +1,13 @@
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+
 
 /**
  * Что нужно сделать
@@ -17,20 +24,51 @@ import java.io.File;
 
 public class Loader {
 
-    public static void main(String[] args) throws Exception {
-        String fileName = "res/data-18M.xml";
+    private static SimpleDateFormat birthDayFormat = new SimpleDateFormat("yyyy.MM.dd");
+    private static SimpleDateFormat visitDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+    private static HashMap<Integer, WorkTime> voteStationWorkTimes = new HashMap<>();
 
-        long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
+    public static void main(String[] args) throws Exception {
+        /**
+         * выбор файла для парсинга
+         */
+//        String fileName = "res/data-0.2M.xml";
+//        String fileName = "res/data-1M.xml";
+        String fileName = "res/data-18M.xml";
+//        String fileName = "res/data-1572M.xml";
+
+        long time = System.currentTimeMillis();
+//        long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
-        XMLHandler handler= new XMLHandler();
+        XMLHandler handler = new XMLHandler();
+
+        /**
+         * инициализация подключения к базе
+         * создание таблицы
+         */
+        DBConnection.getConnection();
+
+        /**
+         * запуск SAX-парсинга
+         */
         saxParser.parse(new File(fileName), handler);
 
-        usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() - usage;
-        System.out.println("usage SAX-parsing = " + usage);
+        System.out.println("time  = " + (System.currentTimeMillis() - time));
 
-        handler.printDuplicatedVotes();
-        handler.printWorkTimes();
+//        try {
+//
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("notes3.txt"));
+//            writer.write(insertQuery.toString());
+//            writer.append('\n');
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
     }
 }
