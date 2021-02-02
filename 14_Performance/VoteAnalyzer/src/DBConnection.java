@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 
 
@@ -7,10 +10,9 @@ public class DBConnection {
     private static String dbName = "learn";
     private static String dbUser = "root";
     private static String dbPass = "Vadim30052011";
-    private static int i = 0;
     private static StringBuilder insertQuery = new StringBuilder();
     private static long time;
-    private static int j = 0;
+    private static int j;
 
 
     public static long getInsertQueryLenth() {
@@ -48,22 +50,30 @@ public class DBConnection {
 
         String sql = "INSERT INTO voter_count(name, birthDay, num_station, time) "
                 + "VALUES" + string;
-//        try {
-//            j = j + 1;
-//            BufferedWriter writer = new BufferedWriter(new FileWriter("notes" + j + ".txt", false));
-//            writer.write(sql);
-//            writer.close();
+
+//        if (sql.length() < 70) {
+//            try {
+//                j = j +1;
+//                BufferedWriter writer = new BufferedWriter(new FileWriter("notes" + j + ".txt", false));
+//                writer.write(sql);
+//                writer.close();
 //
-//        } catch (IOException e) {
-//            e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 //        }
+
         /**
          * поставил условие что бы откинуть запросы с отсутствующими VALUES
          */
-        if (sql.length() > 70) {
+//        if (sql.length() > 70) {
+        try {
             DBConnection.getConnection().createStatement().execute(sql);
-            insertQuery = new StringBuilder();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+            insertQuery = new StringBuilder();
+//        }
 
 
     }
