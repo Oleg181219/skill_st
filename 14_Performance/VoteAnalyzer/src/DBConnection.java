@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.sql.*;
 
 
@@ -11,9 +9,6 @@ public class DBConnection {
     private static String dbUser = "root";
     private static String dbPass = "Vadim30052011";
     private static StringBuilder insertQuery = new StringBuilder();
-    private static long time;
-    private static int j;
-
 
     public static long getInsertQueryLenth() {
         return insertQuery.length();
@@ -21,6 +16,8 @@ public class DBConnection {
 
     public static String getInsertQuery() {
         String insertString = insertQuery.toString();
+
+        insertQuery = new StringBuilder();
         return insertString;
     }
 
@@ -46,42 +43,32 @@ public class DBConnection {
         return connection;
     }
 
-    public static void executeMultiInsert(String string) throws Exception {
+    public static void executeMultiInsert(String insertString) throws Exception {
 
         String sql = "INSERT INTO voter_count(name, birthDay, num_station, time) "
-                + "VALUES" + string;
+                + "VALUES" + insertString;
 
-//        if (sql.length() < 70) {
-//            try {
-//                j = j +1;
-//                BufferedWriter writer = new BufferedWriter(new FileWriter("notes" + j + ".txt", false));
-//                writer.write(sql);
-//                writer.close();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
 
         /**
          * поставил условие что бы откинуть запросы с отсутствующими VALUES
          */
-//        if (sql.length() > 70) {
+        if (sql.length() > 70) {
         try {
             DBConnection.getConnection().createStatement().execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            insertQuery = new StringBuilder();
-//        }
+        }
 
 
     }
 
-    public static void countVoter(String name, String birthDay, String numStation, String time) throws Exception {
+    public static void countVoter(String name, String birthDay, String numStation, String time) {
         birthDay = birthDay.replace('.', '-');
         insertQuery.append((insertQuery.length() == 0 ? "" : ",")
                 + "('" + name + "', '" + birthDay + "', '" + numStation + "', '" + time + "')");
+
 
     }
 

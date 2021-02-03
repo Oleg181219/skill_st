@@ -12,7 +12,9 @@ public class ForkTask extends RecursiveAction {
     @Override
     protected void compute() {
         try {
-            DBConnection.executeMultiInsert(insert);
+            if (insert.length() != 0) {
+                DBConnection.executeMultiInsert(insert);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,10 +1,7 @@
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
@@ -36,11 +33,11 @@ public class Loader {
          */
 //        String fileName = "res/data-0.2M.xml";
 //        String fileName = "res/data-1M.xml";
-        String fileName = "res/data-18M.xml";
-//        String fileName = "res/data-1572M.xml";
+//        String fileName = "res/data-18M.xml";
+        String fileName = "res/data-1572M.xml";
 
         long time = System.currentTimeMillis();
-//        long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -57,10 +54,8 @@ public class Loader {
          * запуск SAX-парсинга
          */
         saxParser.parse(new File(fileName), handler);
-        DBConnection.executeMultiInsert(DBConnection.getInsertQuery());
+        System.out.println("memory usage = " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) - usage));
         System.out.println("time  = " + (System.currentTimeMillis() - time));
-
-
 
 
     }
