@@ -1,53 +1,47 @@
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+public class Main {
+    private static final String HADOOP_CONNECTION_URI = "hdfs://0.0.0.0:8020";
 
-import java.io.BufferedWriter;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.URI;
+    public static void main(String[] args) throws Exception {
 
-public class Main
-{
-    private static String symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        /**
+         * Initializes the class, using rootPath as "/" directory
+         */
+        FileAccess hadoop = new FileAccess(HADOOP_CONNECTION_URI);
 
-    public static void main(String[] args) throws Exception
-    {
-        Configuration configuration = new Configuration();
-        configuration.set("dfs.client.use.datanode.hostname", "true");
-        System.setProperty("HADOOP_USER_NAME", "root");
+        /**
+         * Creates empty file or directory
+         */
+        hadoop.create("test2/ok1.txt");
 
-        FileSystem hdfs = FileSystem.get(
-            new URI("hdfs://HOST_NAME:8020"), configuration
-        );
-        Path file = new Path("hdfs://HOST_NAME:8020/test/file.txt");
+        /**
+         * Appends content to the file
+         */
+        hadoop.append("test2/append_test2.txt", "\ntesting content for append");
 
-        if (hdfs.exists(file)) {
-            hdfs.delete(file, true);
-        }
+        /**
+         * Returns content of the file
+         */
+        System.out.println(hadoop.read("test2/append_test2.txt"));
 
-        OutputStream os = hdfs.create(file);
-        BufferedWriter br = new BufferedWriter(
-            new OutputStreamWriter(os, "UTF-8")
-        );
+        /**
+         * Deletes file or directory
+         */
+        hadoop.delete("test1/append_test1.txt");
+        hadoop.delete("test5/append_test5.txt");
 
-        for(int i = 0; i < 10_000_000; i++) {
-            br.write(getRandomWord() + " ");
-        }
+        /**
+         * Checks, is the "path" is directory or file
+         */
+        // вариант 1. вывод жуть.
+        System.out.println("new - " + hadoop.isDirectory("test1"));
+        System.out.println("new - " + hadoop.isDirectory("test5/append_test1.txt"));
+        //вариант 2. красивый и понятный вывод. но deprecated
+//        System.out.println(hadoop.isDirectory("test1/append_test.txt") ? "да, это директория" : "упс, не директория");
+//        System.out.println(hadoop.isDirectory("test1") ? "да, это директория" : "упс, не директория");
 
-        br.flush();
-        br.close();
-        hdfs.close();
-    }
-
-    private static String getRandomWord()
-    {
-        StringBuilder builder = new StringBuilder();
-        int length = 2 + (int) Math.round(10 * Math.random());
-        int symbolsCount = symbols.length();
-        for(int i = 0; i < length; i++) {
-            builder.append(symbols.charAt((int) (symbolsCount * Math.random())));
-        }
-        return builder.toString();
+        /**
+         * Return the list of files and subdirectories on any directory
+         */
+        System.out.println(hadoop.list("/"));
     }
 }
