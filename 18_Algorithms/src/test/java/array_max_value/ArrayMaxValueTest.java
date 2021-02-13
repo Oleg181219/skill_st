@@ -1,5 +1,6 @@
 package array_max_value;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +14,12 @@ class ArrayMaxValueTest {
     @Test
     @DisplayName("Получить максимальный элемент из пустого массива")
     public void emptyArrayTest(){
-        assertThrows(Exception.class,() -> ArrayMaxValue.getMaxValue(new int[0]));
+        Assertions.assertThrows(Exception.class,() -> ArrayMaxValue.getMaxValue(new int[0]));
     }
 
     @Test
     @DisplayName("Массив со значениями")
-    public void arrayMaxValueTest(){
+    public void arrayMaxValueTest() throws Exception {
         Random random = new Random();
         int n = 10;
         int[] array = new int[n];
