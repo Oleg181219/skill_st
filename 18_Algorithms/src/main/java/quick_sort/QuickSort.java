@@ -30,13 +30,17 @@ public class QuickSort
         while (begin < end) {
 
             for (begin++; array[begin] < pivot; begin++);
+            {
 
-            for (end--; array[end] > pivot; end--);
+                for (end--; array[end] > pivot; end--) ;
+                {
 
-            if (begin < end) {
-                int temp = array[begin];
-                array[begin] = array[end];
-                array[end] = temp;
+                    if (begin < end) {
+                        int temp = array[begin];
+                        array[begin] = array[end];
+                        array[end] = temp;
+                    }
+                }
             }
         }
         return end;
