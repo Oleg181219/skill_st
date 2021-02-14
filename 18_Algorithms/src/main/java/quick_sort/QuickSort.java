@@ -20,11 +20,26 @@ public class QuickSort
         }
     }
 
-    private static int partition(int[] array, int from, int to)
-    {
-        //TODO: moving values around pivot,
-        // return new pivot index
-        return 0;
+    private static int partition(int[] array, int from, int to) {
+
+        int pivot = array[from];
+
+        int begin = from - 1;
+        int end = to + 1;
+
+        while (begin < end) {
+
+            for (begin++; array[begin] < pivot; begin++);
+
+            for (end--; array[end] > pivot; end--);
+
+            if (begin < end) {
+                int temp = array[begin];
+                array[begin] = array[end];
+                array[end] = temp;
+            }
+        }
+        return end;
     }
 
 }
