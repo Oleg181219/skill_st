@@ -5,6 +5,7 @@ import java.util.Objects;
 public class SingleLinkedList {
     private ListItem top;
 
+
     public void push(ListItem item) {
         if (top != null) {
             item.setNext(top);
@@ -28,6 +29,18 @@ public class SingleLinkedList {
     }
 
     public void removeLast() {
+        if (top != null) {
+            if (top.getNext() != null) {
+                ListItem previous = top;
+                ListItem current = top.getNext();
+                while (current.getNext() != null) {
+                    previous = current;
+                    current = current.getNext();
+                }
+                previous.setNext(null);
+            }
+        }
+
         // TODO: remove last element
     }
 

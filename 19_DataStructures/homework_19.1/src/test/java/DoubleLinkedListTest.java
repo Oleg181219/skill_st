@@ -17,7 +17,7 @@ public class DoubleLinkedListTest {
     }
 
     @Test
-    @DisplayName("Проверка добавления одного элемента в конец списка")
+    @DisplayName("Проверка добавления одного элемента в начало списка")
     void addOneItemToHead() {
         ListItem<String> item = new ListItem<>("new");
         doubleLinkedList.addToHead("new");

@@ -7,26 +7,51 @@ public class DoubleLinkedList<T> {
     private ListItem<T> tail;
     private int size;
 
-    public ListItem<T> popHeadElement() {
-        // TODO
-        return null;
+    public ListItem<T> getHead() {
+        return head;
+    }
+
+    public ListItem<T> getTail() {
+        return tail;
+    }
+
+
+    public ListItem popHeadElement() {
+        ListItem listItem = head;
+        if (head != null) {
+            head = head.getNext();
+            head.setPrev(null);
+            listItem.setNext(null);
+        }
+        return listItem;
     }
 
     public ListItem<T> popTailElement() {
-        // TODO
-        return null;
+        ListItem listItem = tail;
+        if (tail != null) {
+            tail = tail.getPrev();
+            tail.setNext(null);
+            listItem.setPrev(null);
+        }
+        return listItem;
     }
 
+
     public void removeHeadElement() {
-        // TODO
+        if (head != null) {
+            head = head.getNext();
+        }
     }
 
     public void removeTailElement() {
-        // TODO
+        if (tail != null) {
+            tail = tail.getPrev();
+            tail.setNext(null);
+        }
     }
 
     public void addToHead(T data) {
-        // TODO
+
     }
 
     public void addToTail(T data) {
@@ -43,6 +68,10 @@ public class DoubleLinkedList<T> {
 
     public ListItem<T> getTailElement() {
         return tail;
+    }
+
+    public boolean isEmpty() {
+        return tail == null; //or head == null
     }
 
     @Override

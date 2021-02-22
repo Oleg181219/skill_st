@@ -7,6 +7,22 @@ public class ListItem<T> {
     ListItem<T> prev;
     ListItem<T> next;
 
+    public ListItem<T> getPrev() {
+        return prev;
+    }
+
+    public void setPrev(ListItem<T> prev) {
+        this.prev = prev;
+    }
+
+    public ListItem<T> getNext() {
+        return next;
+    }
+
+    public void setNext(ListItem<T> next) {
+        this.next = next;
+    }
+
     public ListItem(T data) {
         this.data = data;
     }
