@@ -22,6 +22,7 @@ public class DoubleLinkedList<T> {
             head = head.getNext();
             head.setPrev(null);
             listItem.setNext(null);
+            removeHeadElement();
         }
         return listItem;
     }
@@ -32,6 +33,7 @@ public class DoubleLinkedList<T> {
             tail = tail.getPrev();
             tail.setNext(null);
             listItem.setPrev(null);
+            removeTailElement();
         }
         return listItem;
     }
@@ -40,6 +42,7 @@ public class DoubleLinkedList<T> {
     public void removeHeadElement() {
         if (head != null) {
             head = head.getNext();
+            head.setPrev(null);
         }
     }
 
@@ -51,11 +54,35 @@ public class DoubleLinkedList<T> {
     }
 
     public void addToHead(T data) {
-
+        ListItem<T> item = new ListItem<>(data);
+        item.setNext(head);
+        if (head != null) {
+            head.setPrev(item);
+            item.setNext(head);
+            if (head.getNext() == null) {
+                tail = head;
+            }
+        }
+        head = item;
+        if (tail == null) {
+            tail = head;
+        }
     }
 
     public void addToTail(T data) {
-        // TODO
+        ListItem<T> item = new ListItem<>(data);
+        item.setPrev(tail);
+        if (tail != null) {
+            tail.setNext(item);
+            item.setPrev(tail);
+            if (tail.getPrev() == null) {
+                head = tail;
+            }
+        }
+        tail = item;
+        if (head == null) {
+            head = tail;
+        }
     }
 
     public int getSize() {
