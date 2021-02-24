@@ -4,6 +4,15 @@ public final class Node {
     private final String data;
     private Node left;
     private Node right;
+    private Node parent;
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
+    }
 
     public Node(String data) {
         this.data = data;
