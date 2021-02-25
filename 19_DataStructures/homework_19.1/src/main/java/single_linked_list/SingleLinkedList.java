@@ -40,8 +40,6 @@ public class SingleLinkedList {
                 previous.setNext(null);
             }
         }
-
-        // TODO: remove last element
     }
 
     @Override

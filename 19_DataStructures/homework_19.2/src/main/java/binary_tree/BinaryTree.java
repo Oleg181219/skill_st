@@ -7,17 +7,18 @@ public class BinaryTree {
     private Node root;
 
     public void addNode(String data) {
-//        если root null создаем новый
+
         if (root == null) {
             root = new Node(data);
         } else {
-//            присваиваем родительской ноде сущ root
+
             Node parent = root;
 
             while (true) {
-//                если data < parent помещаем в левую ветку
+                if (data.compareTo(parent.getData()) == 0){
+                    break;
+                }
                 if (data.compareTo(parent.getData()) < 0) {
-//                    если с лева ноды нет, создаем новую со связями
                     if (parent.getLeft() == null) {
                         Node newNode = new Node(data);
                         newNode.setParent(parent);
@@ -27,16 +28,18 @@ public class BinaryTree {
                         parent = parent.getLeft();
                     }
                 } else {
-//                    работаем с правой веткой ноды
-                    if (parent.getRight() == null) {
-                        Node newNode = new Node(data);
-                        newNode.setParent(parent);
-                        parent.setRight(newNode);
-                        break;
-                    } else {
-                        parent = parent.getRight();
+                    if (data.compareTo(parent.getData()) > 0) {
+                        if (parent.getRight() == null) {
+                            Node newNode = new Node(data);
+                            newNode.setParent(parent);
+                            parent.setRight(newNode);
+                            break;
+                        } else {
+                            parent = parent.getRight();
+                        }
                     }
                 }
+//                break;
             }
         }
     }
