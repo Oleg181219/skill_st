@@ -6,14 +6,13 @@ import java.util.List;
 public class Node
 {
     private String fragment;
-    private ArrayList<Integer> nextNodes;
+    private ArrayList<Node> nextNodes;
     private int position;
 
-    public Node(String fragment, int position)
-    {
+    public Node(String fragment, int position) {
         this.fragment = fragment;
-        nextNodes = new ArrayList<>();
         this.position = position;
+        this.nextNodes = new ArrayList<>();
     }
 
     public String getFragment()
@@ -26,8 +25,16 @@ public class Node
         return position;
     }
 
-    public List<Integer> getNextNodes()
+    public List<Node> getNextNodes()
     {
         return nextNodes;
+    }
+
+    public void setFragment(String fragment) {
+        this.fragment = fragment;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }
